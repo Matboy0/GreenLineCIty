@@ -1,0 +1,702 @@
+$(document).ready(function(){if(is_main_website=='1'){fbq('track','View Content',{content_category:'carbon offsets',value:1});(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-3096108-1','auto');ga('send','pageview');ga('require','ecommerce');ga('ecommerce:setAction','detail');ga('ecommerce:send');gtag('event','Calculator Views',{'event_category':'carbon offsets','event_label':'Calculator Views'});}
+function view_count_increase(){let xhr=new XMLHttpRequest();xhr.onreadystatechange=function(){if(xhr.readyState==XMLHttpRequest.DONE){var response=JSON.parse(xhr.responseText);if(!response||response.status!='1'){$('#sti-container').hide();$('#no_show').show();}}};xhr.open("GET",main_url+
+"wp-admin/admin-ajax.php?action=update_view_client&api_key="+
+client_api_key,true);xhr.send(null);}
+if(client_api_key!=""){view_count_increase();}
+if($('#manual-calculator').is(":visible")){$("#breadcrumb-travel-type").empty().append("Offset by Amount");}});function roundLikePHP(num,dec){var num_sign=num>=0?1:-1;var number=parseFloat((Math.round((num*Math.pow(10,dec))+(num_sign*0.0001))/Math.pow(10,dec)).toFixed(dec));return number;}
+var aircraftByCategory={VLJ:{1:{id:1,name:"Citation CJ1+",category:"VLJ",fuel_burn_galph:141,},2:{id:2,name:"Citation Mustang",category:"VLJ",fuel_burn_galph:90,},3:{id:3,name:"Eclipse 500",category:"VLJ",fuel_burn_galph:76,},4:{id:4,name:"Eclipse 550",category:"VLJ",fuel_burn_galph:76,},5:{id:5,name:"Hondajet",category:"VLJ",fuel_burn_galph:120,},6:{id:6,name:"Phenom 100",category:"VLJ",fuel_burn_galph:113,},},Light:{1:{id:7,name:"Beechjet 400A",category:"Light",fuel_burn_galph:222,},2:{id:8,name:"Citation Bravo",category:"Light",fuel_burn_galph:160,},3:{id:9,name:"Citation CJ2",category:"Light",fuel_burn_galph:141,},4:{id:10,name:"Citation CJ2+",category:"Light",fuel_burn_galph:159,},5:{id:11,name:"Citation CJ3",category:"Light",fuel_burn_galph:172,},6:{id:12,name:"Citation CJ3+",category:"Light",fuel_burn_galph:172,},7:{id:13,name:"Citation CJ4",category:"Light",fuel_burn_galph:209,},8:{id:14,name:"Citation Encore",category:"Light",fuel_burn_galph:205,},9:{id:15,name:"Citation Encore+",category:"Light",fuel_burn_galph:205,},10:{id:16,name:"Citation M2",category:"Light",fuel_burn_galph:134,},11:{id:17,name:"Citation Ultra",category:"Light",fuel_burn_galph:223,},12:{id:18,name:"Citation V",category:"Light",fuel_burn_galph:210,},13:{id:19,name:"Hawker 400XP",category:"Light",fuel_burn_galph:222,},14:{id:20,name:"HondaJet Elite",category:"Light",fuel_burn_galph:0,},15:{id:21,name:"Learjet 31",category:"Light",fuel_burn_galph:202,},16:{id:22,name:"Learjet 40",category:"Light",fuel_burn_galph:207,},17:{id:23,name:"Learjet 40XR",category:"Light",fuel_burn_galph:224,},18:{id:24,name:"Nextant 400XTi",category:"Light",fuel_burn_galph:178,},19:{id:25,name:"Nextant 400XT",category:"Light",fuel_burn_galph:160,},20:{id:26,name:"Pilatus PC-24",category:"Light",fuel_burn_galph:154,},21:{id:27,name:"Premier I",category:"Light",fuel_burn_galph:159,},},"Super Light":{1:{id:28,name:"Citation Excel",category:"Super Light",fuel_burn_galph:250,},2:{id:29,name:"Citation XLS",category:"Super Light",fuel_burn_galph:239,},3:{id:30,name:"Citation XLS+",category:"Super Light",fuel_burn_galph:239,},4:{id:31,name:"Learjet 45",category:"Super Light",fuel_burn_galph:205,},5:{id:32,name:"Learjet 45XR",category:"Super Light",fuel_burn_galph:227,},6:{id:33,name:"Learjet 70",category:"Super Light",fuel_burn_galph:198,},7:{id:34,name:"Learjet 75",category:"Super Light",fuel_burn_galph:199,},8:{id:35,name:"Phenom 300",category:"Super Light",fuel_burn_galph:183,},},Midsize:{1:{id:36,name:"Astra SPX",category:"Midsize",fuel_burn_galph:198,},2:{id:37,name:"Citation Latitude",category:"Midsize",fuel_burn_galph:315,},3:{id:38,name:"Citation VI",category:"Midsize",fuel_burn_galph:276,},4:{id:39,name:"Citation VII",category:"Midsize",fuel_burn_galph:288,},5:{id:40,name:"Gulfstream G100",category:"Midsize",fuel_burn_galph:207,},6:{id:41,name:"Gulfstream G150",category:"Midsize",fuel_burn_galph:228,},7:{id:42,name:"Hawker 800XP",category:"Midsize",fuel_burn_galph:291,},8:{id:43,name:"Hawker 850XP",category:"Midsize",fuel_burn_galph:298,},9:{id:44,name:"Hawker 900XP",category:"Midsize",fuel_burn_galph:265,},10:{id:45,name:"Learjet 60",category:"Midsize",fuel_burn_galph:239,},11:{id:46,name:"Learjet 60XR",category:"Midsize",fuel_burn_galph:222,},12:{id:47,name:"Legacy 450",category:"Midsize",fuel_burn_galph:285,},13:{id:48,name:"Praetor 500",category:"Midsize",fuel_burn_galph:213,},14:{id:49,name:"Westwind II",category:"Midsize",fuel_burn_galph:243,},1:{id:50,name:"Challenger 300",category:"Super Midsize",fuel_burn_galph:295,},2:{id:51,name:"Challenger 350",category:"Super Midsize",fuel_burn_galph:297,},3:{id:52,name:"Citation Sovereign",category:"Super Midsize",fuel_burn_galph:281,},4:{id:53,name:"Citation Sovereign+",category:"Super Midsize",fuel_burn_galph:274,},5:{id:54,name:"Citation X",category:"Super Midsize",fuel_burn_galph:386,},6:{id:55,name:"Citation X+",category:"Super Midsize",fuel_burn_galph:400,},7:{id:56,name:"Falcon 2000",category:"Super Midsize",fuel_burn_galph:287,},8:{id:57,name:"Falcon 2000DX",category:"Super Midsize",fuel_burn_galph:292,},9:{id:58,name:"Falcon 2000EX",category:"Super Midsize",fuel_burn_galph:284,},10:{id:59,name:"Falcon 2000LX",category:"Super Midsize",fuel_burn_galph:321,},11:{id:60,name:"Falcon 2000LXS",category:"Super Midsize",fuel_burn_galph:322,},12:{id:61,name:"Falcon 2000S",category:"Super Midsize",fuel_burn_galph:325,},13:{id:62,name:"Falcon 50EX",category:"Super Midsize",fuel_burn_galph:319,},14:{id:63,name:"Gulfstream G200",category:"Super Midsize",fuel_burn_galph:278,},15:{id:64,name:"Gulfstream G280",category:"Super Midsize",fuel_burn_galph:297,},16:{id:65,name:"Hawker 4000",category:"Super Midsize",fuel_burn_galph:321,},17:{id:66,name:"Legacy 500",category:"Super Midsize",fuel_burn_galph:287,},18:{id:67,name:"Praetor 600",category:"Super Midsize",fuel_burn_galph:236,},},Large:{1:{id:68,name:"Challenger 601",category:"Large",fuel_burn_galph:365,},2:{id:69,name:"Challenger 604",category:"Large",fuel_burn_galph:358,},3:{id:70,name:"Challenger 605",category:"Large",fuel_burn_galph:329,},4:{id:71,name:"Challenger 650",category:"Large",fuel_burn_galph:329,},5:{id:72,name:"Challenger 850",category:"Large",fuel_burn_galph:346,},6:{id:73,name:"Falcon 900B",category:"Large",fuel_burn_galph:328,},7:{id:74,name:"Falcon 900DX",category:"Large",fuel_burn_galph:314,},8:{id:75,name:"Falcon 900EX",category:"Large",fuel_burn_galph:314,},9:{id:76,name:"Falcon 900LX",category:"Large",fuel_burn_galph:304,},10:{id:77,name:"Global 5000",category:"Large",fuel_burn_galph:506,},11:{id:78,name:"Gulfstream G300",category:"Large",fuel_burn_galph:540,},12:{id:79,name:"Gulfstream G400",category:"Large",fuel_burn_galph:540,},13:{id:80,name:"Gulfstream G450",category:"Large",fuel_burn_galph:517,},14:{id:81,name:"Gulfstream G500",category:"Large",fuel_burn_galph:447,},15:{id:82,name:"Gulfstream GIV-SP",category:"Large",fuel_burn_galph:540,},16:{id:83,name:"Gulfstream GVSP",category:"Large",fuel_burn_galph:503,},17:{id:84,name:"Legacy 600",category:"Large",fuel_burn_galph:363,},18:{id:85,name:"Legacy 650",category:"Large",fuel_burn_galph:381,},},"Ultra Long Range":{1:{id:86,name:"Falcon 7X",category:"Ultra Long Range",fuel_burn_galph:385,},2:{id:87,name:"Global 6000",category:"Ultra Long Range",fuel_burn_galph:512,},3:{id:88,name:"Global 6500",category:"Ultra Long Range",fuel_burn_galph:486,},4:{id:89,name:"Global 7500",category:"Ultra Long Range",fuel_burn_galph:567,},5:{id:90,name:"Global Express",category:"Ultra Long Range",fuel_burn_galph:535,},6:{id:91,name:"Global Express XRS",category:"Ultra Long Range",fuel_burn_galph:532,},7:{id:92,name:"Gulfstream G550",category:"Ultra Long Range",fuel_burn_galph:447,},8:{id:93,name:"Gulfstream G650",category:"Ultra Long Range",fuel_burn_galph:503,},9:{id:94,name:"Gulfstream G650ER",category:"Ultra Long Range",fuel_burn_galph:503,},10:{id:95,name:"Gulfstream GV",category:"Ultra Long Range",fuel_burn_galph:503,},},"VIP Airliner":{1:{id:96,name:"Airbus ACJ318",category:"VIP Airliner",fuel_burn_galph:690,},2:{id:97,name:"Airbus ACJ319",category:"VIP Airliner",fuel_burn_galph:740,},3:{id:98,name:"Airbus ACJ320",category:"VIP Airliner",fuel_burn_galph:907,},4:{id:99,name:"Boeing 777-200LR VIP",category:"VIP Airliner",fuel_burn_galph:0,},5:{id:100,name:"Boeing Business Jet",category:"VIP Airliner",fuel_burn_galph:758,},6:{id:101,name:"Boeing Business Jet 2",category:"VIP Airliner",fuel_burn_galph:883,},7:{id:102,name:"Boeing Business Jet 3",category:"VIP Airliner",fuel_burn_galph:836,},8:{id:103,name:"Lineage 1000",category:"VIP Airliner",fuel_burn_galph:684,},},"Turboprop Aircraft":{1:{id:104,name:"Aviator TP600",category:"Turboprop Aircraft",fuel_burn_galph:0,},2:{id:105,name:"Beechcraft 1900D",category:"Turboprop Aircraft",fuel_burn_galph:0,},3:{id:106,name:"King Air 100",category:"Turboprop Aircraft",fuel_burn_galph:102,},4:{id:107,name:"King Air 200",category:"Turboprop Aircraft",fuel_burn_galph:113,},5:{id:108,name:"King Air 250",category:"Turboprop Aircraft",fuel_burn_galph:138,},6:{id:109,name:"King Air 350",category:"Turboprop Aircraft",fuel_burn_galph:136,},7:{id:110,name:"King Air B100",category:"Turboprop Aircraft",fuel_burn_galph:104,},8:{id:111,name:"King Air B200",category:"Turboprop Aircraft",fuel_burn_galph:113,},9:{id:112,name:"King Air B200GT",category:"Turboprop Aircraft",fuel_burn_galph:135,},10:{id:113,name:"King Air C90",category:"Turboprop Aircraft",fuel_burn_galph:78,},11:{id:114,name:"King Air C90GTi",category:"Turboprop Aircraft",fuel_burn_galph:103,},12:{id:115,name:"Kodiak 100",category:"Turboprop Aircraft",fuel_burn_galph:48,},13:{id:116,name:"Kodiak 100 Series II",category:"Turboprop Aircraft",fuel_burn_galph:48,},14:{id:117,name:"Piaggio Aero P180 Avanti II",category:"Turboprop Aircraft",fuel_burn_galph:136,},15:{id:118,name:"Piaggio P180 Avanti",category:"Turboprop Aircraft",fuel_burn_galph:136,},16:{id:119,name:"Pilatus PC-12",category:"Turboprop Aircraft",fuel_burn_galph:66,},17:{id:120,name:"Pilatus PC-12 NG",category:"Turboprop Aircraft",fuel_burn_galph:76,},18:{id:121,name:"Socata TBM 700",category:"Turboprop Aircraft",fuel_burn_galph:62,},19:{id:122,name:"Super King Air F90",category:"Turboprop Aircraft",fuel_burn_galph:107,},20:{id:123,name:"Swearingen Fairchild Merlin III",category:"Turboprop Aircraft",fuel_burn_galph:0,},},};window.current_transport_type="plane";window.current_mode="single";window.emmission_offset=0;window.current_options={};window.cart_options=[];window.car_types={"standard-car":1,luxury:2,"4x4":3,van:4,motorcycle:5,hybrid:6,};function remove_emmission(element){let type=element.getAttribute("data-type");for(let i=0;i<window.cart_options.length;i++){const element=window.cart_options[i];if(element.type==type){window.cart_options.splice(i,1);console.log(window.cart_options);buildResultsSection();return;}}}
+function toFixedNum(num,fixed){var re=new RegExp('^-?\\d+(?:\.\\d{0,'+(fixed||-1)+'})?');return num.toString().match(re)[0];}
+function buildResultsSection(){let boat_html="";let plane_html="";let car_html="";let manual_html="";let emmission=Number(window.cart_options.reduce(function(previousValue,currentValue,currentIndex,list){var offset_by_ton=roundLikePHP(list[currentIndex].emission,2);var title='';var symbolMT='';var symbolD='';if(list[currentIndex].travel=="Offset"){var type=list[currentIndex].type;if(list[currentIndex].type=='tons'){title='metric tons';symbolMT=' MT';symbolD='';offset_by_ton=parseFloat(list[currentIndex].emission);}else{title='purchase amount';symbolD='';symbolMT=' MT';offset_by_ton=parseFloat(list[currentIndex].emission);}
+manual_html+="<li>"+
+"<span>Offset: "+title+"</span>"+
+"<span><span>"+symbolD+
+offset_by_ton.toFixed(2)+
+symbolMT+
+"<span class='remove-x' data-type='"+type+"' onclick='remove_emmission(this)'><svg width='8' height='8' viewBox='0 0 8 8' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M7.15035 0.854924C6.95535 0.659924 6.64035 0.659924 6.44535 0.854924L4.00035 3.29492L1.55535 0.849924C1.36035 0.654924 1.04535 0.654924 0.850352 0.849924C0.655352 1.04492 0.655352 1.35992 0.850352 1.55492L3.29535 3.99992L0.850352 6.44492C0.655352 6.63992 0.655352 6.95492 0.850352 7.14992C1.04535 7.34492 1.36035 7.34492 1.55535 7.14992L4.00035 4.70492L6.44535 7.14992C6.64035 7.34492 6.95535 7.34492 7.15035 7.14992C7.34535 6.95492 7.34535 6.63992 7.15035 6.44492L4.70535 3.99992L7.15035 1.55492C7.34035 1.36492 7.34035 1.04492 7.15035 0.854924V0.854924Z' fill='#FF0000'/></svg></span></li>";}else if(list[currentIndex].travel=="plane"){plane_html+="<li>"+
+"<span>"+
+"Flight"+
+": "+
+list[currentIndex].type.toLowerCase()+
+"</span>"+
+"<span><span>"+
+offset_by_ton.toFixed(2)+
+' MT<span><span class="remove-x" data-type="'+
+list[currentIndex].type+
+'" onclick="remove_emmission(this)"><svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.15035 0.854924C6.95535 0.659924 6.64035 0.659924 6.44535 0.854924L4.00035 3.29492L1.55535 0.849924C1.36035 0.654924 1.04535 0.654924 0.850352 0.849924C0.655352 1.04492 0.655352 1.35992 0.850352 1.55492L3.29535 3.99992L0.850352 6.44492C0.655352 6.63992 0.655352 6.95492 0.850352 7.14992C1.04535 7.34492 1.36035 7.34492 1.55535 7.14992L4.00035 4.70492L6.44535 7.14992C6.64035 7.34492 6.95535 7.34492 7.15035 7.14992C7.34535 6.95492 7.34535 6.63992 7.15035 6.44492L4.70535 3.99992L7.15035 1.55492C7.34035 1.36492 7.34035 1.04492 7.15035 0.854924V0.854924Z" fill="#FF0000"/></svg></span></span>'+
+"</li>";}else if(list[currentIndex].travel=="boat"){boat_html+="<li>"+
+"<span>"+
+"Boat"+
+": "+
+list[currentIndex].type.toLowerCase()+
+"</span>"+
+"<span><span>"+
+offset_by_ton.toFixed(2)+
+' MT<span><span class="remove-x" data-type="'+
+list[currentIndex].type+
+'" onclick="remove_emmission(this)"><svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.15035 0.854924C6.95535 0.659924 6.64035 0.659924 6.44535 0.854924L4.00035 3.29492L1.55535 0.849924C1.36035 0.654924 1.04535 0.654924 0.850352 0.849924C0.655352 1.04492 0.655352 1.35992 0.850352 1.55492L3.29535 3.99992L0.850352 6.44492C0.655352 6.63992 0.655352 6.95492 0.850352 7.14992C1.04535 7.34492 1.36035 7.34492 1.55535 7.14992L4.00035 4.70492L6.44535 7.14992C6.64035 7.34492 6.95535 7.34492 7.15035 7.14992C7.34535 6.95492 7.34535 6.63992 7.15035 6.44492L4.70535 3.99992L7.15035 1.55492C7.34035 1.36492 7.34035 1.04492 7.15035 0.854924V0.854924Z" fill="#FF0000"/></svg></span></span>'+
+"</li>";}else if(list[currentIndex].travel=="car"){var car_type=list[currentIndex].type;if(list[currentIndex].type=="standard-car"){car_type="standard car";}
+car_html+="<li>"+
+"<span>"+
+"Car"+
+": "+
+car_type.toLowerCase()+
+"</span>"+
+"<span><span>"+
+offset_by_ton.toFixed(2)+
+' MT<span><span class="remove-x" data-type="'+
+list[currentIndex].type+
+'" onclick="remove_emmission(this)"><svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.15035 0.854924C6.95535 0.659924 6.64035 0.659924 6.44535 0.854924L4.00035 3.29492L1.55535 0.849924C1.36035 0.654924 1.04535 0.654924 0.850352 0.849924C0.655352 1.04492 0.655352 1.35992 0.850352 1.55492L3.29535 3.99992L0.850352 6.44492C0.655352 6.63992 0.655352 6.95492 0.850352 7.14992C1.04535 7.34492 1.36035 7.34492 1.55535 7.14992L4.00035 4.70492L6.44535 7.14992C6.64035 7.34492 6.95535 7.34492 7.15035 7.14992C7.34535 6.95492 7.34535 6.63992 7.15035 6.44492L4.70535 3.99992L7.15035 1.55492C7.34035 1.36492 7.34035 1.04492 7.15035 0.854924V0.854924Z" fill="#FF0000"/></svg></span></span>'+
+"</li>";}
+previousValue=roundLikePHP(previousValue,2)
+previousValue=previousValue.toFixed(2)
+currentIndexEmission=list[currentIndex].emission?roundLikePHP(list[currentIndex].emission,2):0;return(Number(previousValue)+Number(currentIndexEmission));},0));var grand_total=0;var amount_total=0;window.cart_options.forEach((cart)=>{if(cart.type=='amount'||cart.type=='tons'){calc_emission=roundLikePHP(cart.emission,3);}else{calc_emission=roundLikePHP(cart.emission,2);}
+grand_total+=roundLikePHP(calc_emission*window.emmission_offset,2);if(cart.type=='amount'){calc_emission=roundLikePHP(cart.emission,3);amount_total+=roundLikePHP(calc_emission*window.emmission_offset,2);amount_total=toFixedNum(amount_total,2);amount_total=Number(amount_total);}});emmission=roundLikePHP(emmission,2);let total=emmission*window.emmission_offset;grand_total=toFixedNum(grand_total,2);grand_total=Number(grand_total);document.getElementById("emmission-results").className="";document.getElementById("emmission-total-text").innerHTML=emmission.toFixed(2);var currency_rates=new Array();var selectedcurrency=(jQuery('select#multi-currency').val());jQuery('select#multi-currency option').each(function(){var currency_code=jQuery(this).attr('value');var rate=jQuery(this).attr('rate');var symbol=jQuery(this).attr('symbol');var position=jQuery(this).attr('position');var currency_wise_total=grand_total*rate;var currency_wise_amount_total=amount_total*rate;currency_rates.push({currency_code:currency_code,rate:rate,symbol:symbol,currency_wise_total:currency_wise_total,currency_wise_amount_total:currency_wise_amount_total});if(selectedcurrency==currency_code)
+{if(position=='left'){document.getElementById("emmission-final-total").innerHTML=symbol+" "+currency_wise_total.toFixed(2);}else{document.getElementById("emmission-final-total").innerHTML=currency_wise_total.toFixed(2)+" "+symbol;}}});jQuery('select#multi-currency').on('change',function(){var thisval=this.value;var position=$(this).find(":selected").attr('position');setCookie1('mycurrency_code',thisval,30);if(currency_rates.find(item=>item.currency_code==thisval));{var item=currency_rates.find(item=>item.currency_code==thisval);jQuery('.amount-view .amount-view__calculate .amount-label b').html('Amount ('+item.symbol+')');jQuery('.amount-view .amount-view__calculate #amount-input').attr('placeholder','Enter '+item.symbol);jQuery('.amount-view .contribution-rate b').html('Total Trip Value ('+item.symbol+')');jQuery('#manual-calculator #calculation-choice-options .choice-amount.amount .currency-icon-text').html(item.symbol);if(position=='left'){document.getElementById("emmission-final-total").innerHTML=item.symbol+" "+item.currency_wise_total.toFixed(2);}else{document.getElementById("emmission-final-total").innerHTML=item.currency_wise_total.toFixed(2)+" "+item.symbol;}
+if(item.currency_wise_amount_total>0)
+{document.getElementById("amount-input").value=item.currency_wise_amount_total.toFixed(2);var contribution_rate=jQuery(".contribution_rate").val();var totalTripValue=(item.currency_wise_amount_total.toFixed(2)*100)/contribution_rate;jQuery(".total_trip_value").val(totalTripValue.toFixed(2));}}});document.getElementById("metric-ton-final-total").innerHTML=emmission.toFixed(2)+" MT";$("#boat-footprint, #car-footprint, #plane-footprint, #manual-footprint").addClass("d-none");$("#boat-footprint-append,#car-footprint-append,#plane-footprint-append,#manual-footprint-append").empty();if(boat_html!=""){$("#boat-footprint").removeClass("d-none");$("#boat-footprint-append").empty().append(boat_html);}
+if(plane_html!=""){$("#plane-footprint").removeClass("d-none");$("#plane-footprint-append").empty().append(plane_html);}
+if(car_html!=""){$("#car-footprint").removeClass("d-none");$("#car-footprint-append").empty().append(car_html);}
+if(manual_html!=""){$("#manual-footprint").removeClass("d-none");$("#manual-footprint-append").empty().append(manual_html);}
+if(boat_html==""&&plane_html==""&&car_html==""&&manual_html==""){$(".result__illustration-box").removeClass("d-none");$(".result__illustration-box-emmission").addClass("d-none");$("#emmission-results").addClass("d-none");}}
+var getUrlParameter=function getUrlParameter(sParam){var sPageURL=window.location.search.substring(1),sURLVariables=sPageURL.split('&'),sParameterName,i;for(i=0;i<sURLVariables.length;i++){sParameterName=sURLVariables[i].split('=');if(sParameterName[0]===sParam){return sParameterName[1]===undefined?true:decodeURIComponent(sParameterName[1]);}}
+return false;};function setCookie1(cname,cvalue,exdays){const d=new Date();d.setTime(d.getTime()+(exdays*24*60*60*1000));let expires="expires="+d.toUTCString();document.cookie=cname+"="+cvalue+";"+expires+";path=/";}
+function getCookie(cname){let name=cname+"=";let ca=document.cookie.split(';');for(let i=0;i<ca.length;i++){let c=ca[i];while(c.charAt(0)==' '){c=c.substring(1);}
+if(c.indexOf(name)==0){return c.substring(name.length,c.length);}}
+return "";}
+jQuery(document).ready(function(){var currencyFromUrl=getUrlParameter('currency');if(currencyFromUrl!=false)
+{setCookie1('mycurrency_code',currencyFromUrl,30);}
+var getcookieName=getCookie('mycurrency_code');if(currencyFromUrl==false&&getcookieName!='')
+{jQuery('#multi-currency option').each(function(){if(jQuery(this).val()==getcookieName)
+{jQuery('#multi-currency').val(getcookieName);jQuery('.amount-view .amount-view__calculate .amount-label b').html('Amount ('+jQuery(this).attr('symbol')+')');jQuery('.amount-view .amount-view__calculate #amount-input').attr('placeholder','Enter '+jQuery(this).attr('symbol'));jQuery('.amount-view .contribution-rate b').html('Total Trip Value ('+jQuery(this).attr('symbol')+')');jQuery('#manual-calculator #calculation-choice-options .choice-amount.amount .currency-icon-text').text(jQuery(this).attr('symbol'));jQuery("#multi-currency").select2("destroy");jQuery('#multi-currency').select2({});}});}})
+function process_emmission(data){let exist=false;if(window.cart_options1&&!window.cart_options.length){window.cart_options=window.cart_options1;}
+for(let i=0;i<window.cart_options.length;i++){const element=window.cart_options[i];if(element.type==data.type&&element.travel==data.travel){exist=true;console.log(data);window.cart_options[i]=data;}}
+if(!exist){console.log(data);window.cart_options.push(data);}}
+(function IIEF(){function automobileSelect(){let selectBox=document.querySelector(".select-automobile");let selectOptions=document.querySelectorAll(".select-av-option");let planeView=document.querySelector(".plane-view");let ToneView=document.querySelector(".tons-view");let AmountView=document.querySelector(".amount-view");let carView=document.querySelector(".car-view");let boatView=document.querySelector(".boat-view");selectOptions.forEach((option)=>{option.addEventListener("click",()=>{selectOptions.forEach((opt)=>{opt.classList.remove("selected");});option.classList.add("selected");selectBox.setAttribute("data-value",option.getAttribute("data-value"));let dataValue=selectBox.getAttribute("data-value");if(dataValue==="amount"){AmountView.classList.remove("d-none");ToneView.classList.add("d-none");window.current_mode=$('.trip-type').attr('data-value');$("#breadcrumb-travel-type").empty().append("Offset by Amount");}
+if(dataValue==="tons"){ToneView.classList.remove("d-none");AmountView.classList.add("d-none");window.current_mode=$('.trip-type').attr('data-value');$("#breadcrumb-travel-type").empty().append("Offset by Amount");}
+if(dataValue==="plane"){planeView.classList.remove("d-none");carView.classList.add("d-none");boatView.classList.add("d-none");window.current_transport_type="travel";window.current_mode=$('.trip-type').attr('data-value');$("#breadcrumb-travel-type").empty().append("Flight");}else if(dataValue==="car"){planeView.classList.add("d-none");carView.classList.remove("d-none");boatView.classList.add("d-none");window.current_transport_type="car";window.current_mode="car";window.current_options.car=$('.car-view__select-car__options').find('.selected').attr('data-car');$("#breadcrumb-travel-type").empty().append("Car");}else if(dataValue==="boat"){planeView.classList.add("d-none");carView.classList.add("d-none");boatView.classList.remove("d-none");window.current_transport_type="boat";window.current_mode=$('.boat-type').attr('data-value');$("#breadcrumb-travel-type").empty().append("Boat");}});});}
+function radioSelectFunc(){let selectBoxes=document.querySelectorAll(".radio-all-visible");selectBoxes.forEach((selectBox)=>{let options=selectBox.querySelectorAll(".radio-av-option");let callback=selectBox.getAttribute("data-callback");options.forEach((option)=>{option.addEventListener("click",()=>{if(!option.classList.contains("selected")){options.forEach((opt)=>{opt.classList.remove("selected");});option.classList.add("selected");selectBox.setAttribute("data-value",option.getAttribute("data-value"));if(callback){if(callback==="tripTypeFunc"){tripTypeFunc(selectBox);}
+if(callback==="boatTypeFunc"){boatTypeFunc(selectBox);}
+if(callback==="fuelTypeFunc"){fuelTypeFunc(selectBox);}
+if(callback==="fuelConsumptionFunc"){fuelConsumptionFunc(selectBox);}}}});});});}
+function selectBoxes(){let selectBoxes=document.querySelectorAll(".select-box");selectBoxes.forEach((selectBox)=>{if(selectBox.children[0].getAttribute("contenteditable")=="true"){selectBox.children[0].addEventListener("click",(e)=>{e.stopPropagation();});selectBox.addEventListener("keyup",()=>{});}else{selectBox.addEventListener("click",(e)=>{e.stopPropagation();if(selectBox.classList.contains("select-box__show")){selectBox.classList.remove("select-box__show");}else{selectBoxes.forEach((slctBx)=>{slctBx.classList.remove("select-box__show");});selectBox.classList.add("select-box__show");}});if(selectBox.getAttribute("data-select-remove")==="false"){selectOptions(selectBox,false);}else{selectOptions(selectBox,true);}}});function selectOptions(parentEl,removeSelectedOption){let selectBoxOptions=parentEl.querySelectorAll(".select-box__option");selectBoxOptions.forEach((option)=>{option.addEventListener("click",(e)=>{e.stopPropagation();let parentSelectBox=option.parentElement.parentElement;let childSelectBox=option.parentElement.parentElement.children[1];let selected=parentSelectBox.firstElementChild;let valueChosen=option.textContent;if(selected.classList.contains("placeholder")){selected.classList.remove("placeholder");selected.textContent=valueChosen;if(removeSelectedOption){option.remove();}}else{if(removeSelectedOption){option.textContent=selected.textContent;}
+selected.textContent=valueChosen;}
+window.current_options.plane_type=selected.textContent;window.current_options.plane_category=document.getElementById(selected.textContent).getAttribute("data-category");window.current_options.plane_fuel=document.getElementById(selected.textContent).getAttribute("data-fuel");window.current_options.plane_category_length=document.getElementById(selected.textContent).getAttribute("data-length");parentSelectBox.setAttribute("data-value",selected.textContent);selectBoxOptions[0].parentElement.parentElement.classList.remove("select-box__show");});});}
+tripFromToDividerSwapFunc();}
+function getCookie(name){var nameEQ=name+"=";var ca=document.cookie.split(";");for(var i=0;i<ca.length;i++){var c=ca[i];while(c.charAt(0)==" ")c=c.substring(1,c.length);if(c.indexOf(nameEQ)==0)return c.substring(nameEQ.length,c.length);}
+return null;}
+function setCookie(name,value){days=365;var expires="";if(days){var date=new Date();date.setTime(date.getTime()+days*24*60*60*1000);expires="; expires="+date.toUTCString();}
+document.cookie=name+"="+(value||"")+expires+"; path=/";}
+function eraseCookie(name){document.cookie=name+"=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";}
+function offsetBtnClicked(){let offsetBtn=document.querySelector("#offset-button");offsetBtn.addEventListener("click",()=>{if(window.cart_options1&&!window.cart_options.length){window.cart_options=window.cart_options1;}
+console.log(window.cart_options);let emmission=Number(window.cart_options.reduce(function(previousValue,currentValue,currentIndex,list){previousValue=roundLikePHP(previousValue,2)
+previousValue=previousValue.toFixed(2)
+currentIndexEmission=list[currentIndex].emission?roundLikePHP(list[currentIndex].emission,2):0;return(Number(previousValue)+Number(currentIndexEmission));},0));var source=jQuery('#source').val();var sourceClient=jQuery('#sourceClient').val();var external_id=jQuery('#external-id').val();var internovaTrigger=jQuery('#internovaTrigger').val();var agency_trigger=jQuery('#agency-trigger').val();var selectedcurrency=(jQuery('select#multi-currency').val());let total=emmission*window.emmission_offset;var currencyUrlForCheckout="&currency="+selectedcurrency;let xhr=new XMLHttpRequest();xhr.onreadystatechange=function(){if(xhr.readyState==XMLHttpRequest.DONE){var response=JSON.parse(xhr.responseText);if(response.status){let api_key=response.api_key;if(is_main_website=='1'){fbq('track','Initialize Checkout',{content_category:'carbon offsets',value:1});gtag('event','Count Offset Clicks',{'event_category':'Calculator','event_label':'Count Offset Clicks'});(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-3096108-1','auto');ga('send','pageview');ga('require','ecommerce');ga('send','event','UX','click','add to cart');ga('ecommerce:send');}
+if(client_type=="plugin"){eraseCookie("cart_options");setCookie("cart_options",JSON.stringify(window.cart_options));var urlparameter1='';var urlparameter2='';var urlparameter3='';var urlparameter4='';var urlparameter5='';if(typeof(source)!=="undefined")
+{urlparameter1="&source="+source;}
+if(typeof(sourceClient)!=="undefined")
+{urlparameter2="&source-client="+sourceClient;}
+if(typeof(internovaTrigger)!=="undefined")
+{urlparameter3="&internova-trigger="+internovaTrigger;}
+if(typeof(external_id)!=="undefined")
+{urlparameter4="&external-id="+external_id;}
+if(typeof(agency_trigger)!=="undefined")
+{urlparameter5="&agency-trigger="+agency_trigger;}
+window.location.href=main_url+
+"wp-admin/admin-ajax.php?action=add_product_to_cart"+urlparameter1+urlparameter2+urlparameter3+urlparameter4+urlparameter5+currencyUrlForCheckout+"&offset_cost="+
+total+"&data="+
+btoa(JSON.stringify({api_key:api_key,domain:window.location.origin,date:new Date().toISOString(),url:window.location.href,cart:window.cart_options,redirect_url:document.location.origin+document.location.pathname}));}else{window.open(main_url+
+"wp-admin/admin-ajax.php?action=add_product_to_cart"+currencyUrlForCheckout+"&offset_cost="+
+total+
+"&data="+
+btoa(JSON.stringify({api_key:client_api_key,domain:window.location.origin,date:new Date().toISOString(),url:window.location.href,cart:window.cart_options,redirect_url:document.location.origin+document.location.pathname})));}}}};xhr.open("GET",main_url+"/wp-admin/admin-ajax.php?action=get_client_api_key",true);xhr.send(null);});}
+function offsetTotal(){let xhr=new XMLHttpRequest();xhr.onreadystatechange=function(){if(xhr.readyState==XMLHttpRequest.DONE){var response=JSON.parse(xhr.responseText);if(response.status){window.emmission_offset=Number(response.offset);}}};xhr.open("GET",main_url+"wp-admin/admin-ajax.php?action=calculate_offset_ajax",true);xhr.send(null);}
+function calculateBtnClicked(){let calcBtn=document.querySelector(".calculate-btn");if(is_main_website=='1'){fbq('track','Add to Cart',{content_category:'carbon offsets',value:1});gtag('event','Count Calculate Clicks',{'event_category':'Calculator','event_label':'Count Calculate Clicks'});}
+console.log(calcBtn);calcBtn.addEventListener("click",()=>{if($(window).width()<=425){$("#resultcontainer").show();$("#calculator").css({"padding-bottom":"20px",});}
+let travelType=null;let tripType=null;let singleTripType=null;let flightType=null;let passengerCount=null;let boatFuel=null;let boatGallon=null;let boatLiter=null;console.log(window.current_transport_type);if(window.current_transport_type=="boat"){if(window.current_mode=="liveaboard"){let boatDay=Number($(".liveaboard-trip-view__first-q__add-minus-func").find(".add-minus-func__number").val());let boatPeople=Number($(".liveaboard-people").find(".add-minus-func__number").val());let xhr=new XMLHttpRequest();xhr.onreadystatechange=function(){if(xhr.readyState==XMLHttpRequest.DONE){var response=JSON.parse(xhr.responseText);if(response.status){process_emmission({travel:"boat",type:"liveaboard",days:boatDay,people:boatPeople,emission:roundLikePHP(response.emission,2),});document.getElementById("emmission-total-text").className="";buildResultsSection();document.querySelector(".result__illustration-box-emmission").className="result__illustration-box-emmission";document.querySelector(".result__illustration-box").className="result__illustration-box d-none";}}};xhr.open("GET",main_url+
+"wp-admin/admin-ajax.php?action=calculate_ajax&travel_type=boat&boat_type=liveaboard&days="+
+boatDay+
+"&people="+
+boatPeople,true);xhr.send(null);}
+if(window.current_mode=="yacht"){let fuelConsumptionAmount=Number($("#total_fuel_consumption").val());fuel_type=$("#boat-view__fuel-type__selectButton").attr('data-value');let xhr=new XMLHttpRequest();xhr.onreadystatechange=function(){if(xhr.readyState==XMLHttpRequest.DONE){var response=JSON.parse(xhr.responseText);if(response.status){process_emmission({travel:"boat",type:"yacht",fuel_consumption:fuelConsumptionAmount,fuel_type:fuel_type,consumption_type:window.current_options.consumption_type,emission:roundLikePHP(response.emission,2),});document.getElementById("emmission-total-text").className="";buildResultsSection();document.querySelector(".result__illustration-box-emmission").className="result__illustration-box-emmission";document.querySelector(".result__illustration-box").className="result__illustration-box d-none";}}};xhr.open("GET",main_url+
+"wp-admin/admin-ajax.php?action=calculate_ajax&travel_type=boat&boat_type=yacht&fuel_consumption="+
+fuelConsumptionAmount+
+"&fuel_type="+
+fuel_type+
+"&fuel_unit="+
+window.current_options.consumption_type,true);xhr.send(null);}
+if(window.current_mode=="cruise"){let boatDay=Number($(".cruise-days").find(".add-minus-func__number").val());let boatPeople=Number($(".cruise-people").find(".add-minus-func__number").val());let xhr=new XMLHttpRequest();xhr.onreadystatechange=function(){if(xhr.readyState==XMLHttpRequest.DONE){var response=JSON.parse(xhr.responseText);if(response.status){process_emmission({travel:"boat",type:"cruise",days:boatDay,people:boatPeople,emission:roundLikePHP(response.emission,2),});document.getElementById("emmission-total-text").className="";buildResultsSection();document.querySelector(".result__illustration-box-emmission").className="result__illustration-box-emmission";document.querySelector(".result__illustration-box").className="result__illustration-box d-none";}}};xhr.open("GET",main_url+
+"wp-admin/admin-ajax.php?action=calculate_ajax&travel_type=boat&boat_type=cruise&days="+
+boatDay+
+"&people="+
+boatPeople,true);xhr.send(null);}}
+if(window.current_mode=="single"){let flightTypeText=$("#seattype-button-value").attr('data-value');let passenger_count=parseInt($("#single-trip-view__options__people__button-container-button").attr('data-value'));let single_trip_type=$("#triptype-button-value").attr('data-value');if(flightTypeText==="Economy"){flight_type=2;}else{flight_type=1;}
+if(single_trip_type=="One Way"){single_trip_type="single";}else if(single_trip_type=="Multi-City"){single_trip_type="multi-city";}else{single_trip_type="round-trip";}
+let location_from=[];let location_to=[];let location_name_from=[];let location_name_to=[];counter=parseInt($("#single_trip_counter").val());for(var i=1;i<=counter;i++){if(single_trip_type!="multi-city"&&i!=1){continue;}
+from=$("#from-"+i).val();to=$("#to-"+i).val();from_name=$("#from-name-"+i).val();to_name=$("#to-name-"+i).val();if(from){location_from.push(from);location_name_from.push(from_name);}
+if(to){location_to.push(to);location_name_to.push(to_name);}}
+if(location_from.length!==location_to.length){alert("Some fields are missing. Please check and submit again.");return;}
+console.log(single_trip_type);let xhr=new XMLHttpRequest();xhr.onreadystatechange=function(){if(xhr.readyState==XMLHttpRequest.DONE){var response=JSON.parse(xhr.responseText);if(response.status){process_emmission({travel:"plane",type:"one trip",flight_type:flight_type,single_trip_type:single_trip_type,passenger_count:passenger_count,location_from,location_to,location_name_from,location_name_to,emission:roundLikePHP(response.emission,2),});document.getElementById("emmission-total-text").className="";buildResultsSection();document.querySelector(".result__illustration-box-emmission").className="result__illustration-box-emmission";document.querySelector(".result__illustration-box").className="result__illustration-box d-none";}}};location_from_=encodeURIComponent(JSON.stringify(location_from));location_to_=encodeURIComponent(JSON.stringify(location_to));xhr.open("GET",main_url+
+"wp-admin/admin-ajax.php?action=calculate_ajax&travel_type=plane&trip_type=single&flight_type="+
+flight_type+
+"&passenger_count="+
+passenger_count+
+"&single_trip_type="+
+single_trip_type+
+"&location_from="+
+location_from_+
+"&location_to="+
+location_to_,true);xhr.send(null);}
+if(window.current_mode=="multiple"){let multipleFlightTypeText=$("#multipletrip-seattype-button-value").attr('data-value');if(multipleFlightTypeText==="Economy"){multiple_flight_type=2;}else{multiple_flight_type=1;}
+let shortFlight=Number($(".short-flight").find(".add-minus-func__number").val());let mediumFlight=Number($(".medium-flight").find(".add-minus-func__number").val());let longFlight=Number($(".long-flight").find(".add-minus-func__number").val());let xhr=new XMLHttpRequest();xhr.onreadystatechange=function(){if(xhr.readyState==XMLHttpRequest.DONE){var response=JSON.parse(xhr.responseText);if(response.status){process_emmission({travel:"plane",type:"multiple trips",flight_type:multiple_flight_type,short_flight:shortFlight,medium_flight:mediumFlight,long_flight:longFlight,emission:roundLikePHP(response.emission,2),});document.getElementById("emmission-total-text").className="";buildResultsSection();document.querySelector(".result__illustration-box-emmission").className="result__illustration-box-emmission";document.querySelector(".result__illustration-box").className="result__illustration-box d-none";}}};xhr.open("GET",main_url+
+"wp-admin/admin-ajax.php?action=calculate_ajax&travel_type=plane&trip_type=multiple&short_flight="+
+shortFlight+
+"&medium_flight="+
+mediumFlight+
+"&long_flight="+
+longFlight+
+"&flight_type="+
+multiple_flight_type,true);xhr.send(null);}
+if(window.current_mode=="car"){let hours=Number(document.querySelector("#hour_driven").value);let distance=Number(document.querySelector("#distance_travel").value);let distance_type=document.querySelector(".distance-type").getAttribute("data-value");let calculate_by=$("#car-view__calculate-by__selectButton").attr('data-value');let xhr=new XMLHttpRequest();xhr.onreadystatechange=function(){if(xhr.readyState==XMLHttpRequest.DONE){var response=JSON.parse(xhr.responseText);if(response.status){process_emmission({travel:"car",type:window.current_options.car,hours:hours,distance:distance,calculate_by:calculate_by,calculate_unit:distance_type,emission:roundLikePHP(response.emission,2),});document.getElementById("emmission-total-text").className="";buildResultsSection();document.querySelector(".result__illustration-box-emmission").className="result__illustration-box-emmission";document.querySelector(".result__illustration-box").className="result__illustration-box d-none";}}};xhr.open("GET",main_url+
+"wp-admin/admin-ajax.php?action=calculate_ajax&travel_type=vehicle&vehicle_type="+
+window.car_types[window.current_options.car]+
+"&hours="+
+hours+
+"&distance="+
+distance+
+"&calculate_unit="+
+distance_type+
+"&calculate_by="+
+calculate_by,true);xhr.send(null);}
+if(window.current_mode=="charter"){let emmission=calculateCharterEmissions();aircraftId=window.current_options.plane_type;flight_time=document.getElementById("flight_time").value;flight_time_minutes=document.getElementById("flight_time_minutes").value;fuelBurn=window.current_options.plane_fuel;if(!aircraftId||aircraftId==""||(!flight_time&&!flight_time_minutes)){return;}
+if(emmission>0){process_emmission({travel:"plane",type:"charter",emission:roundLikePHP(emmission,2),aircraftId:aircraftId,flight_time:flight_time,flight_time_minutes:flight_time_minutes,fuelBurn:fuelBurn,});}
+document.getElementById("emmission-total-text").className="";buildResultsSection();document.querySelector(".result__illustration-box-emmission").className="result__illustration-box-emmission";document.querySelector(".result__illustration-box").className="result__illustration-box d-none";}
+travelType=document.querySelector(".select-automobile").getAttribute("data-value");});}
+function tripTypeFunc(box){let singleView=document.querySelector(".single-trip-view");let multipleView=document.querySelector(".multiple-trip-view");let charterView=document.querySelector(".charter-view");let value=box.getAttribute("data-value");if(value==="single"){singleView.classList.remove("d-none");multipleView.classList.add("d-none");charterView.classList.add("d-none");window.current_transport_type="flight";window.current_mode="single";}else if(value==="multiple"){singleView.classList.add("d-none");multipleView.classList.remove("d-none");charterView.classList.add("d-none");window.current_transport_type="flight";window.current_mode="multiple";}else{singleView.classList.add("d-none");multipleView.classList.add("d-none");charterView.classList.remove("d-none");window.current_transport_type="flight";window.current_mode="charter";}}
+function boatTypeFunc(box){let cruiseView=document.querySelector(".cruise-trip-view");let liveaboardView=document.querySelector(".liveaboard-trip-view");let yachtView=document.querySelector(".yacht-trip-view");let value=box.getAttribute("data-value");window.current_transport_type="boat";window.current_mode="cruise";if(value==="cruise"){cruiseView.classList.remove("d-none");liveaboardView.classList.add("d-none");yachtView.classList.add("d-none");window.current_mode="cruise";window.current_options={};}else if(value==="liveaboard"){cruiseView.classList.add("d-none");liveaboardView.classList.remove("d-none");yachtView.classList.add("d-none");window.current_mode="liveaboard";window.current_options={};}else{cruiseView.classList.add("d-none");liveaboardView.classList.add("d-none");yachtView.classList.remove("d-none");window.current_mode="yacht";window.current_options={consumption_type:"gallon",fuel_type:"diesel",};}}
+function fuelConsumptionFunc(box){let value=box.getAttribute("data-value");window.current_transport_type="boat";window.current_mode="yacht";window.current_options.consumption_type=value;}
+function windowClick(){window.addEventListener("click",(e)=>{let selectBoxesOptions=document.querySelectorAll(".select-box");let dropdownTripType=document.querySelector("#triptype-dropdown");dropdownTripType.classList.replace("show","hide");let dropdownNumberOfPeople=document.querySelector("#numberofpeopledropdown");dropdownNumberOfPeople.classList.replace("show","hide");let dropdownSeatType=document.querySelector("#seatdropdown");dropdownSeatType.classList.replace("show","hide");let multitripSeatType=document.querySelector("#multipletrip-seatdropdown");multitripSeatType.classList.replace("show","hide");$('.from-airport-dropdown, .to-airport-dropdown').hide();hideSelectCalculateby();hideSelectFueltype()
+selectBoxesOptions.forEach((selectBox)=>{selectBox.classList.remove("select-box__show");});});}
+function planeTypeFill(){let plaTypeSelectBoxOptions=document.querySelector(".plane-type .select-box__options");Object.entries(aircraftByCategory).forEach((cate)=>{let p=document.createElement("p");p.classList.add("optgroup-text");p.textContent=cate[0];plaTypeSelectBoxOptions.appendChild(p);Object.entries(cate[1]).forEach((option)=>{let div=document.createElement("div");div.classList.add("select-box__option");div.setAttribute("data-category",cate[0]);div.setAttribute("data-length",cate.length);div.setAttribute("data-fuel",option[1]["fuel_burn_galph"]);div.setAttribute("id",option[1]["name"]);div.textContent=option[1]["name"];plaTypeSelectBoxOptions.appendChild(div);});});setActiveState();}
+function setActiveState(){$(".select-box__option").on("click",(e)=>{if(e.target.classList.contains("charter-active-state")){}else{$(".charter-active-state").removeClass("charter-active-state");e.target.classList.add("charter-active-state");}});}
+function getAverageFuelBurn(category){numAircraft=window.current_options.plane_category_length;numAircraftWithFuelBurn=0;totalFuelBurn=0;for(let a=1;a<=numAircraft;a++){var fuelBurn=aircraftByCategory[category][a].fuel_burn_galph;if(fuelBurn>0){numAircraftWithFuelBurn+=1;totalFuelBurn+=fuelBurn;}}
+if(numAircraftWithFuelBurn>0){return totalFuelBurn/numAircraftWithFuelBurn;}else{return-1;}}
+function calculateCharterEmissions(){var aircraftId=window.current_options.plane_type;var flightTime=document.getElementById("flight_time").value;var flight_time_minutes=document.getElementById("flight_time_minutes").value;var jetFuelCO2Coeff=21.1;var error=false;if(!aircraftId){error=true;}
+if(isNaN(flightTime)||flightTime<=0){flightTime=0;}
+if(isNaN(flight_time_minutes)||flight_time_minutes<=0){flight_time_minutes=0;}
+flight_time_minutes=flight_time_minutes!="0"?flight_time_minutes/60:0;flightTime=parseFloat(flightTime)+parseFloat(flight_time_minutes);if(!error){var fuelBurn=window.current_options.plane_fuel;if(fuelBurn==0){fuelBurn=getAverageFuelBurn(window.current_options.category);if(fuelBurn==-1){return 0;}}
+var emissionsInLbs=fuelBurn*flightTime*jetFuelCO2Coeff;var emissionsInMT=Number(emissionsInLbs/2204.6);return emissionsInMT;}else{return 0;}}
+function tripFromToDividerSwapFunc(){let btns=document.querySelectorAll(".trip-from-to__divider");btns.forEach((btn)=>{let clone=btn.cloneNode(true);btn.parentNode.replaceChild(clone,btn);});btns=document.querySelectorAll(".trip-from-to__divider");btns.forEach((btn)=>{btn.addEventListener("click",()=>{let parent=btn.parentElement;let leftValue=parent.children[0].firstElementChild;let rightValue=parent.children[2].firstElementChild;if(leftValue.textContent!=="Where From"&&rightValue.textContent!=="Where To"){let leftValueText=leftValue.textContent;leftValue.textContent=rightValue.textContent;rightValue.textContent=leftValueText;}});});}
+function vehicleFunc(){let calculateSelect=document.getElementById("calculate_by");let vehicleIcons=document.querySelectorAll(".general-select-option");vehicleIcons.forEach((icon)=>{icon.addEventListener("click",()=>{document.querySelectorAll(".general-select-option").forEach((value)=>{value.className="general-select-option";});icon.className="general-select-option selected";window.current_options.car=icon.getAttribute("data-car");});});}
+var expandedFrom=false;var expandedTo=false;var defaultTextFrom=true;var defaultTextTo=true;function dropdownTrigger(){var trigger=document.querySelector("#trip-from");var options=document.querySelector("#where_from");var trigger2=document.querySelector("#trip-to");var options2=document.querySelector("#where_to");trigger.addEventListener("click",()=>{$(this).parent().find(".select-box__options").show();var a=$(trigger).attr("data-value");if(a!=""){return;}
+if(defaultTextFrom==true){trigger.innerHTML=" ";}
+if(expandedFrom==false){options.style.display="block";expandedFrom=true;}else{options.style.display="none";expandedFrom=false;}});trigger2.addEventListener("click",()=>{$(this).parent().find(".select-box__options").show();var b=$(trigger2).attr("data-value");if(b!=""){return;}
+if(defaultTextTo==true){trigger2.innerHTML=" ";}
+if(expandedTo==false){options2.style.display="block";expandedTo=true;}else{options2.style.display="none";expandedTo=false;}});}
+function pickFromLocation(latitude,longitude,name){var choice=$(".trip-from");var setLatandLong=document.getElementById("trip-from_latandlong");choice.innerHTML=name;setLatandLong.setAttribute("latitude",latitude);setLatandLong.setAttribute("longitude",longitude);}
+function editBoat(data){if(data.type=="liveaboard"){$(".liveaboard-days").attr("data-value",data.days);$(".liveaboard-days").find(".add-minus-func__number").val(data.days);$(".liveaboard-people").attr("data-value",data.people);$(".liveaboard-people").find(".add-minus-func__number").val(data.people);}else if(data.type=="yacht"){window.current_options.fuel_type=data.fuel_type;window.current_options.consumption_type=data.consumption_type;$('#boat-view__fuel-type__selectButton').attr('data-value',data.fuel_type);fuel_type=data.fuel_type;$("#fueltype-list").find('.selected_fueltype').removeClass('selected_fueltype');$("#fueltype-list").find(`[data-value='${fuel_type}']`).addClass('selected_fueltype');if(fuel_type=='diesel'){$('#fueltypeDisplay').empty().html('Diesel');}else if(fuel_type=='gasoline'){$('#fueltypeDisplay').empty().html('Gasoline (Petrol)');}else if(fuel_type=='biodiesel'){$('#fueltypeDisplay').empty().html('Biodiesel');}
+$("#fuel_type").val(data.fuel_type);$("#total_fuel_consumption").val(data.fuel_consumption);$(".consumption-type").find(".radio-av-option").removeClass("selected");$(".consumption-type").find(".radio-av-option[data-value ='"+data.consumption_type+"']").addClass("selected");}else if(data.type=="cruise"){$(".cruise-days").attr("data-value",data.days);$(".cruise-days").find(".add-minus-func__number").val(data.days);$(".cruise-people").attr("data-value",data.people);$(".cruise-people").find(".add-minus-func__number").val(data.people);}}
+function editCar(data){console.log('car edit',data);$("#calculate_by").val(data.calculate_by);if(data.calculate_by=="distance"){$('#calculate_by_distance').addClass('selected_calculateby');$('#calculate_by_hour').removeClass('selected_calculateby');$('#car-view__calculate-by__selectButton').attr('data-value','distance');$('#calculatebyDisplay').empty().html('Distance');$(".car-view__calculate-hour").addClass("d-none");$(".car-view__calculate-distance").removeClass("d-none");$("#distance_travel").val(data.distance);$(".distance-type").attr("data-value",data.calculate_unit);$(".car-view").find(".radio-av-option").removeClass("selected");$(".car-view").find(".radio-av-option[data-value ='"+data.calculate_unit+"']").addClass("selected");}else{$('#calculate_by_hour').addClass('selected_calculateby');$('#calculate_by_distance').removeClass('selected_calculateby');$('#car-view__calculate-by__selectButton').attr('data-value','hour');$('#calculatebyDisplay').empty().html('Hours');$(".car-view__calculate-hour").removeClass("d-none");$(".car-view__calculate-distance").addClass("d-none");$("#hour_driven").val(data.hours);}}
+function fill_airports(data){location_name_from=data.location_name_from;location_name_to=data.location_name_to;location_from=data.location_from;location_to=data.location_to;$("#single_trip_counter").val(location_name_from.length);for(var i=0;i<location_name_from.length;i++){key_val=i+1;remove_class=key_val=="1"?"":"remove_input";input=`<input class="`+
+remove_class+
+`" type="hidden" name="from-`+
+key_val+
+`" id="from-`+
+key_val+
+`" value="`+
+location_from[i]+
+`" data-counter="`+
+key_val+
+`">`;input+=`<input class="`+
+remove_class+
+`" type="hidden" name="from-name-`+
+key_val+
+`" id="from-name-`+
+key_val+
+`" value="`+
+location_name_from[i]+
+`" data-counter="`+
+key_val+
+`">`;input+=`<input class="`+
+remove_class+
+`" type="hidden" name="to-`+
+key_val+
+`" id="to-`+
+key_val+
+`" value="`+
+location_to[i]+
+`" data-counter="`+
+key_val+
+`">`;input+=`<input class="`+
+remove_class+
+`" type="hidden" name="to-name-`+
+key_val+
+`" id="to-name-`+
+key_val+
+`" value="`+
+location_name_to[i]+
+`" data-counter="`+
+key_val+
+`">`;$(".single_trip_details").append(input);if(key_val=='1'){$('#travel-row-1').find('.from-location-input').val(location_name_from[i]);$('#travel-row-1').find('.to-location-input').val(location_name_to[i]);}else{html=`<div class="single-trip-view__input__container__row" data-count="${key_val}" id="travel-row-${key_val}">
+
+          <div class="single-trip-view__input__container__row-from" tabindex="0" >
+            <div class="single-trip-view__input__container__row-from-container">
+
+              <div class="from-icon-container">
+
+              </div>
+
+              <div class="from-input-container">
+                <input autocomplete="off" type="text" name="" id="from-location-input" class="from-location-input" placeholder="Where From?" datavalue="None" value="${location_name_to[i]}">
+              </div>
+
+              <div class="from-icondropdown-container">
+
+              </div>
+
+            </div> 
+            <!--DROP DOWN CODE STARTS-->
+            <div class="from-location-dropdown-container from-airport-dropdown" id="from-location-dropdown"> 
+              <div class="from-location-dropdown-subcontainer">
+                <ul class="from-location-dropdown-list" id="from-location-dropdown-list">
+
+                </ul>
+              </div>
+            </div>
+            <!--DROP DOWN CODE ENDS-->
+          </div>
+
+          <div class="single-trip-view__input__container__row-exchange">
+
+            <svg class="exchange-svg-mobile" width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16.3353 4.2829L8.17257 4.2829V6.61086L16.3353 6.61086V10.1028L20.9814 5.44688L16.3353 0.79096V4.2829ZM0.0214844 12.4308L4.6676 17.0867V13.5947H12.8303V11.2668H4.6676L4.6676 7.77484L0.0214844 12.4308ZM16.3353 4.2829L8.17257 4.2829V6.61086L16.3353 6.61086V10.1028L20.9814 5.44688L16.3353 0.79096V4.2829ZM0.0214844 12.4308L4.6676 17.0867V13.5947H12.8303V11.2668H4.6676L4.6676 7.77484L0.0214844 12.4308Z" fill="#4B5563"></path>
+            </svg>
+
+          </div>
+
+          <div class="single-trip-view__input__container__row-to" tabindex="0">
+            <div class="single-trip-view__input__container__row-to-container">
+
+              <div class="to-icon-container">
+                <svg width="16" height="16" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M13.291 4.48612H11.6243V9.97779L1.96602 0.319458L0.791016 1.49446L10.4493 11.1528H4.95768V12.8195H13.291V4.48612Z" fill="#4B5563" />
+                </svg>
+              </div>
+
+              <div class="to-input-container">
+                <input autocomplete="off" type="text" name="" id="to-location-input" class="to-location-input" placeholder="Where To?" datavalue="none" value="${location_name_from[i]}">
+              </div>
+
+              <div class="to-icondropdown-container">
+                <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 0.486084L5 5.48608L10 0.486084H0Z" fill="#4B5563" />
+                </svg>
+              </div>
+
+            </div>
+            <!--DROP DOWN CODE STARTS-->
+            <div class="from-location-dropdown-container to-airport-dropdown" id="to-location-dropdown">
+              <div class="from-location-dropdown-subcontainer">
+                <ul class="from-location-dropdown-list to-location-dropdown-list" id="to-location-dropdown-list">
+
+                </ul>
+              </div>
+            </div>
+            <!--DROP DOWN CODE STARTS-->
+          </div>
+
+          <div class="delete-container hide" id="delete-container">
+            <svg width="15" height="15" viewBox="0 0 24 24" focusable="false" class="cross-icon">
+              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z">
+              </path>
+            </svg>
+          </div>
+
+  <div class="delete-container" id="delete-container">
+    <svg width="15" height="15" viewBox="0 0 24 24" focusable="false" class="cross-icon">
+      <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z">
+      </path>
+    </svg>
+  </div>
+
+</div>`;$('.single-trip-view__input__container').append(html);RemoveTrip();bindDropDowns();bindAnotherFlight();bind_exchange_places();}}}
+function editPlane(data){type=data.type;if(type=="one trip"){$('#single_economy').removeClass('selected_seat');$('#single_premium').removeClass('selected_seat');if(data.flight_type=="2"){flight_type="Economy";$("#seattype-button-value").attr('data-value',flight_type);$('#seattypeDisplay').empty().html(flight_type);$('#single_economy').addClass('selected_seat');}else{flight_type="Premium";$("#seattype-button-value").attr('data-value',flight_type);$('#seattypeDisplay').empty().html(flight_type);$('#single_premium').addClass('selected_seat');}
+if(data.passenger_count=='0'){data.passenger_count=1;}
+$("#peoplenumber-list").find('.selected_numberofPeople').removeClass('selected_numberofPeople');$("#peoplenumber-list").find(`[value='${data.passenger_count}']`).addClass('selected_numberofPeople');$('#total-people-traveling').empty().html(data.passenger_count);$("#triptype-list").find('.selected_triptype').removeClass('selected_triptype');$('#triptypeDisplay').empty().html(flight_type);single_trip_type=data.single_trip_type;if(single_trip_type=="single"){data.single_trip_type='one-way';single_trip_type_name="One way";}else if(single_trip_type=="multi-city"){$("#another-flight-container").show();single_trip_type_name="Multi-city";}else{single_trip_type_name="Round trip";}
+$("#triptype-list").find(`[value='${data.single_trip_type}']`).addClass('selected_triptype');fill_airports(data);$("#triptype-button-value").attr('data-value',single_trip_type_name)
+$("#triptypeDisplay").empty().append(single_trip_type_name);return;}else if(type=="multiple trips"){$('#multiple_economy').removeClass('multitrip_selected_seat');$('#multiple_premium').removeClass('multitrip_selected_seat');if(data.flight_type=="2"){flight_type="Economy";$("#multipletrip-seattype-button-value").attr('data-value',flight_type);$('#multipletrip-seattypeDisplay').empty().html(flight_type);$('#multiple_economy').addClass('multitrip_selected_seat');}else{flight_type="Premium";$("#multipletrip-seattype-button-value").attr('data-value',flight_type);$('#multipletrip-seattypeDisplay').empty().html(flight_type);$('#multiple_premium').addClass('multitrip_selected_seat');}
+$(".short-flight").find(".add-minus-func__number").val(data.short_flight);$(".medium-flight").find(".add-minus-func__number").val(data.medium_flight);$(".long-flight").find(".add-minus-func__number").val(data.long_flight);}else if(type=="charter"){window.current_options.plane_fuel=data.fuelBurn;window.current_options.plane_type=data.aircraftId;$("#flight_time_minutes").val(data.flight_time_minutes);$("#flight_time").val(data.flight_time);$(".plane_type").attr("data-value",data.aircraftId);$(".plane-type__p").empty().append(data.aircraftId);}}
+function editManual(data){var val='';if(data.type==='tons'){val=data.emission;}else{val=data.price;}
+$('#'+data.type+"-input").val(val)}
+function check_edit(){if(client_type=="iframe"){return;}
+let action=findGetParameter("action");let product_name=findGetParameter("product_name");var car_values=[];if(action&&action=="edit"){if(product_name&&product_name!=''){product_name=product_name.split("-");product_name=product_name[0];product_name_array=product_name.split(":");get_travel=product_name_array[0].trim().toLowerCase();console.log(get_travel);get_travel_type=product_name_array[1].trim().toLowerCase();if(get_travel=="boat"){if(get_travel_type=="yacht"){window.current_options.consumption_type="gallon";}
+$(".boat-view, .plane-view, .car-view").addClass("d-none");$(".select-automobile__plane, .select-automobile__car, select-automobile__boat").removeClass("selected");$(".boat-view").removeClass("d-none");$(".select-automobile").attr("data-value","boat");$(".select-automobile__boat").addClass("selected");$(".boat-type").find(".radio-av-option").removeClass("selected");$(".boat-type").find(".radio-av-option[data-value ='"+get_travel_type+"']").addClass("selected");$(".boat-view").removeClass("d-none");$(".boat-type").attr("data-value",get_travel_type);$(".cruise-trip-view, .liveaboard-trip-view, .yacht-trip-view").addClass("d-none");$("."+get_travel_type+"-trip-view").removeClass("d-none");window.current_transport_type="boat";console.log('here travel ',get_travel_type);window.current_mode=get_travel_type;}else if(get_travel=="car"){if(get_travel_type=="standard car"){get_travel_type="standard-car";}
+$(".select-automobile").attr("data-value","car");$(".boat-view, .plane-view, .car-view").addClass("d-none");$(".select-automobile__plane, .select-automobile__car, select-automobile__boat").removeClass("selected");$(".select-automobile__car").addClass("selected");$(".car-view").removeClass("d-none");$(".general-select-option").removeClass("selected");$(".general-select-option[data-car ='"+get_travel_type+"']").addClass("selected");window.current_transport_type="car";window.current_mode="car";window.current_options.car=get_travel_type;}else if(get_travel=="plane"||get_travel=="flight"){$(".boat-view, .plane-view, .car-view").addClass("d-none");$(".select-automobile__plane, .select-automobile__car, select-automobile__boat").removeClass("selected");$(".plane-view").removeClass("d-none");$(".select-automobile").attr("data-value","plane");$(".select-automobile__plane").addClass("selected");if(get_travel_type=="one trip"){get_travel_type="single";}else if(get_travel_type=="multiple trips"){get_travel_type="multiple";}
+window.current_transport_type="travel";window.current_mode=get_travel_type;$(".trip-type").find(".radio-av-option").removeClass("selected");$(".trip-type").find(".radio-av-option[data-value ='"+get_travel_type+"']").addClass("selected");$(".trip-type").attr("data-value",get_travel_type);$(".single-trip-view, .multiple-trip-view , .charter-trip-view").addClass("d-none");$("."+get_travel_type+"-trip-view").removeClass("d-none");}else if(get_travel=="offset"){var travel_offset=product_name_array[1].trim().toLowerCase();console.log(travel_offset);$("#manual_offset_div").hide();$("#calculate_offset_div").show();$("#manual-calculator").show();$("#calculator").hide();$("#breadcrumb-travel-type").html("Offset by Amount");if(travel_offset==='dollar amount'){$('.amount-view').removeClass('d-none');$('.choice-metric').removeClass('selected');$('.tons-view').addClass('d-none');$('.choice-amount').addClass('selected');}}}
+cart_options=getCookie("cart_options");console.log(cart_options);if(cart_options&&cart_options!==null&&cart_options!==""){let boat_html="";let plane_html="";let car_html="";let manual_html="";let emmission=0;cart_options=JSON.parse(cart_options);cart_options.forEach((product)=>{emmission+=parseFloat(product.emission);if(product.travel=="plane"){editPlane(product);plane_html+="<li>"+
+"<span>"+
+product.travel+
+": "+
+product.type+
+"</span>"+
+"<span><span>"+
+product.emission.toFixed(2)+
+' MT<span><span class="remove-x" data-type="'+
+product.type+
+'" onclick="remove_emmission(this)"><svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.15035 0.854924C6.95535 0.659924 6.64035 0.659924 6.44535 0.854924L4.00035 3.29492L1.55535 0.849924C1.36035 0.654924 1.04535 0.654924 0.850352 0.849924C0.655352 1.04492 0.655352 1.35992 0.850352 1.55492L3.29535 3.99992L0.850352 6.44492C0.655352 6.63992 0.655352 6.95492 0.850352 7.14992C1.04535 7.34492 1.36035 7.34492 1.55535 7.14992L4.00035 4.70492L6.44535 7.14992C6.64035 7.34492 6.95535 7.34492 7.15035 7.14992C7.34535 6.95492 7.34535 6.63992 7.15035 6.44492L4.70535 3.99992L7.15035 1.55492C7.34035 1.36492 7.34035 1.04492 7.15035 0.854924V0.854924Z" fill="#FF0000"/></svg></span></span>'+
+"</li>";}else if(product.travel=="boat"){editBoat(product)
+boat_html+="<li>"+
+"<span>"+
+product.travel+
+": "+
+product.type+
+"</span>"+
+"<span><span>"+
+product.emission.toFixed(2)+
+' MT<span><span class="remove-x" data-type="'+
+product.type+
+'" onclick="remove_emmission(this)"><svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.15035 0.854924C6.95535 0.659924 6.64035 0.659924 6.44535 0.854924L4.00035 3.29492L1.55535 0.849924C1.36035 0.654924 1.04535 0.654924 0.850352 0.849924C0.655352 1.04492 0.655352 1.35992 0.850352 1.55492L3.29535 3.99992L0.850352 6.44492C0.655352 6.63992 0.655352 6.95492 0.850352 7.14992C1.04535 7.34492 1.36035 7.34492 1.55535 7.14992L4.00035 4.70492L6.44535 7.14992C6.64035 7.34492 6.95535 7.34492 7.15035 7.14992C7.34535 6.95492 7.34535 6.63992 7.15035 6.44492L4.70535 3.99992L7.15035 1.55492C7.34035 1.36492 7.34035 1.04492 7.15035 0.854924V0.854924Z" fill="#FF0000"/></svg></span></span>'+
+"</li>";}else if(product.travel=="car"){car_values.push(product);console.log(product);editCar(product);car_append_type=product.type=="standard-car"?"standard car":product.type;car_html+="<li>"+
+"<span>"+
+product.travel+
+": "+
+car_append_type+
+"</span>"+
+"<span><span>"+
+product.emission.toFixed(2)+
+' MT<span><span class="remove-x" data-type="'+
+product.type+
+'" onclick="remove_emmission(this)"><svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.15035 0.854924C6.95535 0.659924 6.64035 0.659924 6.44535 0.854924L4.00035 3.29492L1.55535 0.849924C1.36035 0.654924 1.04535 0.654924 0.850352 0.849924C0.655352 1.04492 0.655352 1.35992 0.850352 1.55492L3.29535 3.99992L0.850352 6.44492C0.655352 6.63992 0.655352 6.95492 0.850352 7.14992C1.04535 7.34492 1.36035 7.34492 1.55535 7.14992L4.00035 4.70492L6.44535 7.14992C6.64035 7.34492 6.95535 7.34492 7.15035 7.14992C7.34535 6.95492 7.34535 6.63992 7.15035 6.44492L4.70535 3.99992L7.15035 1.55492C7.34035 1.36492 7.34035 1.04492 7.15035 0.854924V0.854924Z" fill="#FF0000"/></svg></span></span>'+
+"</li>";}else if(product.travel=="Offset"){var sum,title,symbolMT,symbolD;var type=product.type;if(product.type=='tons'){title='metric tons';symbolMT=' MT';symbolD='';sum=roundLikePHP(product.emission,2);}else{title='dollar amount';symbolD='';symbolMT=' MT';sum=roundLikePHP(product.emission,2);}
+editManual(product)
+manual_html+="<li>"+
+"<span>Offset: "+title+"</span>"+
+"<span><span>"+symbolD+
+sum+
+symbolMT+
+"<span class='remove-x' data-type='"+type+"' onclick='remove_emmission(this)'><svg width='8' height='8' viewBox='0 0 8 8' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M7.15035 0.854924C6.95535 0.659924 6.64035 0.659924 6.44535 0.854924L4.00035 3.29492L1.55535 0.849924C1.36035 0.654924 1.04535 0.654924 0.850352 0.849924C0.655352 1.04492 0.655352 1.35992 0.850352 1.55492L3.29535 3.99992L0.850352 6.44492C0.655352 6.63992 0.655352 6.95492 0.850352 7.14992C1.04535 7.34492 1.36035 7.34492 1.55535 7.14992L4.00035 4.70492L6.44535 7.14992C6.64035 7.34492 6.95535 7.34492 7.15035 7.14992C7.34535 6.95492 7.34535 6.63992 7.15035 6.44492L4.70535 3.99992L7.15035 1.55492C7.34035 1.36492 7.34035 1.04492 7.15035 0.854924V0.854924Z' fill='#FF0000'/></svg></span></li>";}});setCookie("car_values",JSON.stringify(car_values));window.cart_options=cart_options;window.cart_options1=window.cart_options;let xhr=new XMLHttpRequest();xhr.onreadystatechange=function(data){if(xhr.readyState==XMLHttpRequest.DONE){var response=JSON.parse(xhr.responseText);if(response.status){emmission_offset=Number(response.offset);var grand_total=0;var amount_total=0;window.cart_options1.forEach((cart)=>{grand_total+=roundLikePHP(cart.emission*window.emmission_offset,2);if(cart.type=='amount'){calc_emission=roundLikePHP(cart.emission,3);amount_total+=roundLikePHP(calc_emission*window.emmission_offset,2);amount_total=toFixedNum(amount_total,2);amount_total=Number(amount_total);}});let total=emmission*emmission_offset;$(".result__illustration-box").addClass("d-none");$(".result__illustration-box-emmission, #emmission-results").removeClass("d-none");document.getElementById("emmission-results").className="";document.getElementById("emmission-total-text").innerHTML=emmission.toFixed(2);var currency_rates=new Array();var selectedcurrency=(jQuery('select#multi-currency').val());jQuery('select#multi-currency option').each(function(){var currency_code=jQuery(this).attr('value');var rate=jQuery(this).attr('rate');var symbol=jQuery(this).attr('symbol');var position=jQuery(this).attr('position');var currency_wise_total=grand_total*rate;var currency_wise_amount_total=amount_total*rate;currency_rates.push({currency_code:currency_code,rate:rate,symbol:symbol,currency_wise_total:currency_wise_total,currency_wise_amount_total:currency_wise_amount_total});if(selectedcurrency==currency_code)
+{if(position=='left'){document.getElementById("emmission-final-total").innerHTML=symbol+" "+currency_wise_total.toFixed(2);}else{document.getElementById("emmission-final-total").innerHTML=currency_wise_total.toFixed(2)+" "+symbol;}
+if(currency_wise_amount_total>0)
+{document.getElementById("amount-input").value=currency_wise_amount_total.toFixed(2);var contribution_rate=jQuery(".contribution_rate").val();var totalTripValue=(currency_wise_amount_total.toFixed(2)*100)/contribution_rate;jQuery(".total_trip_value").val(totalTripValue.toFixed(2));}}});jQuery('select#multi-currency').on('change',function(){var thisval=this.value;var position=$(this).find(":selected").attr('position');setCookie1('mycurrency_code',thisval,30);if(currency_rates.find(item=>item.currency_code==thisval));{var item=currency_rates.find(item=>item.currency_code==thisval);jQuery('.amount-view .amount-view__calculate .amount-label b').html('Amount ('+item.symbol+')');jQuery('.amount-view .amount-view__calculate #amount-input').attr('placeholder','Enter '+item.symbol);jQuery('.amount-view .contribution-rate b').html('Total Trip Value ('+item.symbol+')');jQuery('#manual-calculator #calculation-choice-options .choice-amount.amount .currency-icon-text').html(item.symbol);if(position=='left'){document.getElementById("emmission-final-total").innerHTML=item.symbol+" "+item.currency_wise_total.toFixed(2);}else{document.getElementById("emmission-final-total").innerHTML=item.currency_wise_total.toFixed(2)+" "+item.symbol;}
+if(item.currency_wise_amount_total>0)
+{document.getElementById("amount-input").value=item.currency_wise_amount_total.toFixed(2);var contribution_rate=jQuery(".contribution_rate").val();var totalTripValue=(item.currency_wise_amount_total.toFixed(2)*100)/contribution_rate;jQuery(".total_trip_value").val(totalTripValue.toFixed(2));}}});document.getElementById("metric-ton-final-total").innerHTML=emmission.toFixed(2)+" MT";$("#boat-footprint, #car-footprint, #plane-footprint").addClass("d-none");$("#boat-footprint-append,#car-footprint-append,#plane-footprint-append").empty();if(boat_html!=""){$("#boat-footprint").removeClass("d-none");$("#boat-footprint-append").empty().append(boat_html);}
+if(plane_html!=""){$("#plane-footprint").removeClass("d-none");$("#plane-footprint-append").empty().append(plane_html);}
+if(car_html!=""){$("#car-footprint").removeClass("d-none");$("#car-footprint-append").empty().append(car_html);}
+if(manual_html!=""){$("#manual-footprint").removeClass("d-none");$("#manual-footprint-append").empty().append(manual_html);}}}};xhr.open("GET",main_url+"wp-admin/admin-ajax.php?action=calculate_offset_ajax",true);xhr.send(null);}
+$('#resultcontainer').show();}
+function findGetParameter(parameterName){var result=null,tmp=[];location.search.substr(1).split("&").forEach(function(item){tmp=item.split("=");if(tmp[0]===parameterName)result=decodeURIComponent(tmp[1]);});return result;}}
+function findGetParameters(parameterName){var result=null,tmp=[];location.search.substr(1).split("&").forEach(function(item){tmp=item.split("=");if(tmp[0]===parameterName)result=decodeURIComponent(tmp[1]);});return result;}
+function ScrollToSection(){let continueOffsetting=document.getElementById("continue-calculating-button");let body=document.getElementById("mkd-container");continueOffsetting.addEventListener("click",()=>{body.scrollIntoView({behavior:"smooth"});});}
+function checkColor(){if(primary_color!=''||secondary_color!=''||primary_btn_color!=''||secondary_btn_color!=''){changeColorTheme(primary_color,secondary_color,primary_btn_color,secondary_btn_color);}}
+function showSelectedTrip(){automobile=$('#select-automobile-options').find('.selected').attr('data-value');$('.plane-view, .car-view, .boat-view').removeClass('d-none');if(automobile=='plane'){$('.car-view, .boat-view').addClass('d-none');}else if(automobile=='car'){$('#select-automobile-options').attr('data-value','car');$('.plane-view, .boat-view').addClass('d-none');window.current_transport_type="car";window.current_mode="car";window.current_options.car='standard-car';}else if(automobile=='boat'){$('#select-automobile-options').attr('data-value','boat');$('.car-view, .plane-view').addClass('d-none');window.current_transport_type="boat";window.current_mode="cruise";}}
+async function init(){if($(window).width()<=435){$("#resultcontainer").hide();$("#calculator").css({"padding-bottom":"50px",});}
+eraseCookie("car_values");await offsetTotal();showSelectedTrip()
+automobileSelect();radioSelectFunc();planeTypeFill();selectBoxes();calculateBtnClicked();windowClick();vehicleFunc();offsetBtnClicked();check_edit();ScrollToSection();selectTriptype();showAddMoreFlights();multitripSelectTriptype();selectCalculateby();selectFuelType()}
+init();})();function bindAnotherFlight(){$(".to-location-input").on("click",function(event){event.stopImmediatePropagation();event.preventDefault();var a=$(this).val();$('.from-airport-dropdown, .to-airport-dropdown').hide();if(a!=""){$(this).parent().parent().parent().find(".to-airport-dropdown").show();return;}
+$(this).val('');});$(".from-location-input").on("click",function(event){event.stopImmediatePropagation();event.preventDefault();var b=$(this).val();$('.from-airport-dropdown, .to-airport-dropdown').hide();if(b!=""){$(this).parent().parent().parent().find(".from-airport-dropdown").show();return;}
+$(this).val('');});(function(){var timeout=null;var waitTimeMilliseconds=500;var minLength=3;var _changeInterval=null;$(".from-location-input").keyup(function(event){event.stopImmediatePropagation();event.preventDefault();from_location=$(this);function get_from(){from=$(from_location).val();if(from.length<=2){return;}
+$(from_location).val(from);var from_info=$(from_location);getFromLocation(from,from_info);}
+clearInterval(_changeInterval);_changeInterval=setInterval(function(){clearInterval(_changeInterval);get_from();},1000);});$(".to-location-input").keyup(function(event){event.stopImmediatePropagation();event.preventDefault();to_location=$(this);function get_to(){to=$(to_location).val();if(to.length<=2){return;}
+$(to_location).val(to);var to_info=$(to_location);getToLocation(to,to_info);}
+clearInterval(_changeInterval);_changeInterval=setInterval(function(){clearInterval(_changeInterval);get_to();},1000);});})();}
+bindAnotherFlight();function getToLocation(to,totxt){var dropDown=$(totxt).parent().parent().parent().find(".to-location-dropdown-list");var textToSearch=to;$.ajax({url:main_url+"wp-admin/admin-ajax.php?action=get_airports_by_name",type:"get",data:{search_data:textToSearch},dataType:"json",success:function(response){if(response.status!="1"){return;}
+response=response.response;html="";for(const[key,regions]of Object.entries(response)){show_options="hide";if(response[Object.keys(response)[0]][0].municipality===regions[Object.keys(regions)[0]].municipality){show_options="show";}
+municipality=regions[0].municipality&&regions[0].municipality!=''?regions[0].municipality:regions[0].region;if(regions[0].country=='United States'){address=regions[0].municipality+', '+regions[0].region;}else{address=municipality+', '+regions[0].country;}
+html+=`<ul class="from-location-dropdown-list from-location-dropdown-list" id="to-location-dropdown-list">
+        <li datavalue="${key}" class="from-location-dropdown-listitem">        
+        <div class="from-location-dropdown-listitem-container">
+            <div class="from-location-dropdown-listitem-container-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="sub-to-icon">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z" fill="#4B5563">
+                </path>
+                <circle cx="12" cy="9" r="2.5" fill="#4B5563"></circle>
+              </svg>
+            </div>
+
+            <div class="from-location-dropdown-listitem-container-text">
+              <p class="from-location-dropdown-listitem-container__p">${address}</p>
+            </div>
+
+            <div class="from-location-dropdown-listitem-container-dropdown">
+              <svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="arrow-down-details show"><path d="M5.41 7.59L4 9l8 8 8-8-1.41-1.41L12 14.17" fill="#4B5563"></path></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="arrow-up-details hide"><path d="M5.41 7.59L4 9l8 8 8-8-1.41-1.41L12 14.17" fill="#4B5563"></path></svg>
+            </div>
+          </div>
+
+        </li>`;for(const[a_key,airport]of Object.entries(regions)){html+=`<div class="from-location-dropdown-listitem-airport-container to_dropdown_class ${show_options} register_input_to"  data-id="${airport.id}" data-name="${municipality} ${airport.iata_code}">
+                  <div class="from-location-dropdown-listitem-airport-subcontainer">
+                    <div class="from-location-dropdown-listitem-airport-subcontainer-icon">
+                      <svg enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" class=""><g>
+                      <path d="M22,16v-2l-8.5-5V3.5C13.5,2.67,12.83,2,12,2s-1.5,0.67-1.5,1.5V9L2,14v2l8.5-2.5V19L8,20.5L8,22l4-1l4,1l0-1.5L13.5,19 v-5.5L22,16z" fill="#4B5563"></path><path d="M0,0h24v24H0V0z" fill="none"></path></g></svg>
+                    </div>
+
+                    <div class="from-location-dropdown-listitem-airport-subcontainer-text">
+                      <p clas="from-location-dropdown-listitem-airport-subcontainer-text-name">${airport.name} (${airport.iata_code})<p>
+                    </div>
+                  </div>
+                </div>`;}
+html+=`</ul>`;}
+dropDown.empty().append(html);$(dropDown).parent().parent().show();bindRegisterInputTo();bindAnotherFlight();bindAirportDropDown();bindClickonCountry()},error:function(err){alert(err);},});}
+function getFromLocation(from,fromtxt){var dropDown=$(fromtxt).parent().parent().parent().find(".from-location-dropdown-list");var textToSearch=from;$.ajax({url:main_url+"wp-admin/admin-ajax.php?action=get_airports_by_name",type:"get",data:{search_data:textToSearch},dataType:"json",success:function(response){if(response.status!="1"){return;}
+response=response.response;html="";for(const[key,regions]of Object.entries(response)){show_options="hide";if(response[Object.keys(response)[0]][0].municipality===regions[Object.keys(regions)[0]].municipality){show_options="show";}
+municipality=regions[0].municipality&&regions[0].municipality!=''?regions[0].municipality:regions[0].region;if(regions[0].country=='United States'){address=regions[0].municipality+', '+regions[0].region;}else{address=municipality+', '+regions[0].country;}
+html+=`<ul class="from-location-dropdown-list" id="from-location-dropdown-list">
+        <li datavalue="${key}" class="from-location-dropdown-listitem">
+
+          <div class="from-location-dropdown-listitem-container">
+            <div class="from-location-dropdown-listitem-container-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="sub-from-icon">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z" fill="#4B5563">
+                </path>
+                <circle cx="12" cy="9" r="2.5" fill="#4B5563"></circle>
+              </svg>
+            </div>
+
+            <div class="from-location-dropdown-listitem-container-text">
+              <p class="from-location-dropdown-listitem-container__p">${address}</p>
+            </div>
+
+            <div class="from-location-dropdown-listitem-container-dropdown">
+              <svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="arrow-down-details show"><path d="M5.41 7.59L4 9l8 8 8-8-1.41-1.41L12 14.17"></path></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="arrow-up-details hide"><path d="M5.41 7.59L4 9l8 8 8-8-1.41-1.41L12 14.17"></path></svg>
+            </div>
+          </div>
+
+        </li>`;for(const[a_key,airport]of Object.entries(regions)){html+=`<div class="from-location-dropdown-listitem-airport-container from_dropdown_class ${show_options} register_input_from"  data-id="${airport.id}" data-name="${municipality} ${airport.iata_code}">
+                  <div class="from-location-dropdown-listitem-airport-subcontainer">
+                    <div class="from-location-dropdown-listitem-airport-subcontainer-icon">
+                      <svg enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24" focusable="false" class=""><g>
+                      <path d="M22,16v-2l-8.5-5V3.5C13.5,2.67,12.83,2,12,2s-1.5,0.67-1.5,1.5V9L2,14v2l8.5-2.5V19L8,20.5L8,22l4-1l4,1l0-1.5L13.5,19 v-5.5L22,16z" fill="#4B5563"></path><path d="M0,0h24v24H0V0z" fill="none"></path></g></svg>
+                    </div>
+
+                    <div class="from-location-dropdown-listitem-airport-subcontainer-text">
+                      <p clas="from-location-dropdown-listitem-airport-subcontainer-text-name">${airport.name} (${airport.iata_code})<p>
+                    </div>
+                  </div>
+                </div>`;}
+html+=`</ul>`;}
+dropDown.empty().append(html);$(dropDown).parent().parent().show();bindRegisterInputFrom();bindAnotherFlight();bindAirportDropDown();bindClickonCountry()},error:function(err){alert(err);},});}
+function bindAirportDropDown(){$('.from-location-dropdown-listitem-container-dropdown').on("click",function(e){e.stopPropagation();var listitem=e.target.parentElement.parentElement.parentElement;var currentElement=listitem.nextElementSibling;while(listitem.nextElementSibling.tagName!="LI"){if(currentElement.classList.contains("hide")){currentElement.classList.replace("hide","show");this.firstElementChild.classList.replace("show","hide");this.lastElementChild.classList.replace("hide","show");}else{currentElement.classList.replace("show","hide");this.firstElementChild.classList.replace("hide","show");this.lastElementChild.classList.replace("show","hide");}
+currentElement=currentElement.nextElementSibling;continue;}});};bindAirportDropDown();function bindClickonCountry(){$('.from-location-dropdown-listitem').on("click",function(e){e.stopPropagation();});}
+bindRegisterInputFrom();bindRegisterInputTo();function bindRegisterInputFrom(){$(".register_input_from").on("click",function(event){event.stopImmediatePropagation();event.preventDefault();name=$(this).attr("data-name");id=$(this).attr("data-id");counter=$(this).parent().parent().parent().parent().parent().parent().attr("data-count");remove_class=counter=="1"?"":"remove_input";if(!$("#from-"+counter).val()){input=`<input class="`+
+remove_class+
+`" type="hidden" name="from-`+
+counter+
+`" id="from-`+
+counter+
+`" value="`+
+id+
+`" data-counter="`+
+counter+
+`">`;input+=`<input class="`+
+remove_class+
+`" type="hidden" name="from-name-`+
+counter+
+`" id="from-name-`+
+counter+
+`" value="`+
+name+
+`" data-counter="`+
+counter+
+`">`;$(".single_trip_details").append(input);}else{$("#from-"+counter).val(id);}
+$(this).parent().parent().parent().parent().parent().parent().find(".from-location-input").val(name);$(this).parent().parent().parent().parent().parent().parent().find(".from-airport-dropdown").hide();});}
+function bindRegisterInputTo(){$(".register_input_to").on("click",function(event){event.stopImmediatePropagation();event.preventDefault();name=$(this).attr("data-name");id=$(this).attr("data-id");counter=$(this).parent().parent().parent().parent().parent().parent().attr("data-count");remove_class=counter=="1"?"":"remove_input";if(!$("#to-"+counter).val()){input=`<input class="to_airport_id `+
+remove_class+
+`" type="hidden" name="to-`+
+counter+
+`" id="to-`+
+counter+
+`" value="`+
+id+
+`" data-counter="`+
+counter+
+`">`;input+=`<input class="`+
+remove_class+
+`" type="hidden" name="to-name-`+
+counter+
+`" id="to-name-`+
+counter+
+`" value="`+
+name+
+`" data-counter="`+
+counter+
+`">`;$(".single_trip_details").append(input);}else{$("#to-"+counter).val(id);}
+single_trip_counter=parseInt($('#single_trip_counter').val());counter=parseInt(counter);for(var i=counter+1;i<=single_trip_counter;i++){value_exists=$('#from-'+i).attr('data-counter');if(value_exists){$('#from-'+i).val(id);$('#travel-row-'+i).find('.from-location-input').val(name);break;}}
+$(this).parent().parent().parent().parent().parent().parent().find(".to-location-input").val(name);$(this).parent().parent().parent().parent().parent().parent().find(".to-airport-dropdown").hide();});}
+function delete_cell(){$(this).parent().parent().remove();}
+function custom_calculator(){$("#manual_offset_div").show();$("#calculate_offset_div").hide();$("#manual-calculator").hide();$("#calculator").show();$("#redirect-to-manual").show();$("#redirect-to-auto").hide();$("#breadcrumb-travel-type").html("Flight");$('.select-automobile .select-av-option').removeClass('selected');$('.select-automobile__plane.select-av-option').addClass('selected');$('.plane-view').removeClass('d-none');$('.car-view').addClass('d-none');$('.boat-view').addClass('d-none');$('.main-header__left-text h1').text('Calculate Your Travel Carbon Footprint\n');$('.main-header__left-text .calc-purpose').text('Use our carbon footprint calculator to calculate your travel emissions and purchase carbon offsets.');}
+function manual_calculator(){$("#manual_offset_div").hide();$("#calculate_offset_div").show();$("#manual-calculator").show();$("#calculator").hide();$("#redirect-to-manual").hide();$("#redirect-to-auto").show();$("#breadcrumb-travel-type").html("Offset by Amount");$('.main-header__left-text h1').text('Offset by Amount\n');$('.calculation-choice .choice-av-option').removeClass('selected');$('.choice-metric.choice-av-option.select-av-option.tons').addClass('selected');$('.amount-view.box-view').addClass('d-none');$('.tons-view.box-view').removeClass('d-none');$('.amount_h3').text('Offset by Amount');$('.main-header__left-text .calc-purpose').text('Use the form below to offset your carbon either by metric ton or purchase amount');}
+function custom_calculator_new(){$("#manual_offset_div").show();$("#calculate_offset_div").hide();$("#manual-calculator").hide();$("#calculator").show();$("#redirect-to-manual").show();$("#redirect-to-auto").hide();$("#breadcrumb-travel-type").html("Flight");$('.select-automobile .select-av-option').removeClass('selected');$('.select-automobile__plane.select-av-option').addClass('selected');$('.plane-view').removeClass('d-none');$('.car-view').addClass('d-none');$('.boat-view').addClass('d-none');$('.main-header__left-text h1').text('Calculate Your Travel Carbon Footprint\n');$('.main-header__left-text .calc-purpose').text('Use our carbon footprint calculator to calculate your travel emissions and purchase carbon offsets.');}
+function manual_calculator_new(){$("#manual_offset_div").hide();$("#calculate_offset_div").show();$("#manual-calculator").show();$("#calculator").hide();$("#redirect-to-manual").hide();$("#redirect-to-auto").show();$("#breadcrumb-travel-type").html("Offset by Amount");$('.main-header__left-text h1').text('Offset by Amount\n');$('.calculation-choice .choice-av-option').removeClass('selected');$('.choice-metric.choice-av-option.select-av-option.tons').addClass('selected');$('.amount-view.box-view').addClass('d-none');$('.tons-view.box-view').removeClass('d-none');$('.amount_h3').text('Offset by Amount');$('.main-header__left-text .calc-purpose').text('Use the form below to offset your carbon either by metric ton or purchase amount');}
+async function doAjax(args){const result=await $.ajax({url:main_url+"wp-admin/admin-ajax.php?action="+args.action,type:'GET',data:args});return result;}
+async function paramaterisedCalculation(){var type=$('#calculation-choice-options').find('.choice-av-option.selected').attr('data-value');var price=0;if(type==='tons'){offset_by_ton=$("#tons-input").val();if(offset_by_ton<0){return;}}else{price=$("#amount-input").val();var currency_rates=new Array();var selectedcurrency=(jQuery('select#multi-currency').val());jQuery('select#multi-currency option').each(function(){var currency_code=jQuery(this).attr('value');var rate=jQuery(this).attr('rate');var symbol=jQuery(this).attr('symbol');var usdollarget=price/rate;if(selectedcurrency==currency_code)
+{price=usdollarget.toFixed(2);}});var data={'action':'calculate_ajax_mt','price':price,'type':'amount',};offset_by_ton=await doAjax(data);if(offset_by_ton<0){return;}}
+process_emmission({travel:"Offset",type:type,price:price,emission:roundLikePHP(offset_by_ton,3),});document.getElementById("emmission-total-text").className="";document.querySelector(".result__illustration-box-emmission").className="result__illustration-box-emmission";document.querySelector(".result__illustration-box").className="result__illustration-box d-none";$('#resultcontainer').show();buildResultsSection();}
+$("#calculate-manual-offset").click(async function(){if(jQuery('.calculation-choice .choice-av-option.choice-metric').hasClass('selected'))
+{if(jQuery('#tons-input').val().length>0)
+{paramaterisedCalculation();jQuery('#tons-input').removeClass('texterror');}else
+{jQuery('#tons-input').addClass('texterror');return false;}}
+if(jQuery('.calculation-choice .choice-av-option.choice-amount').hasClass('selected'))
+{if(jQuery('#amount-input').val().length>0)
+{paramaterisedCalculation();jQuery('#amount-input').removeClass('texterror');jQuery('#total_trip_value').removeClass('texterror');}else
+{if(jQuery('#total_trip_value').length>0)
+{jQuery('#total_trip_value').addClass('texterror');return false;}else
+{jQuery('#amount-input').addClass('texterror');return false;}}}});$("body").on("DOMSubtreeModified",".single_trip_type",function(){$(".add-another-trip").hide();$(".added-box").remove();single_trip_type=$("#single_trip_type").html();$(".remove_input").remove();if(single_trip_type=="Multi-City"){$(".add-another-trip").show();}});$(".add-minus-func__number").on("change",function(){value=parseInt($(this).val());if(isNaN(value)){$(this).parent().attr("data-value",0);$(this).parent().find(".add-minus-func__number").empty().val(0);return;}});$(".add-minus-func__minus").on("click",function(e){hidemultitripseatdropdown()
+e.stopPropagation();number=parseInt($(this).parent().find(".add-minus-func__number").val());if(number!==0){number--;}
+$(this).parent().find(".add-minus-func__number").empty().val(number);$(this).parent().attr("data-value",number);});$(".add-minus-func__add").on("click",function(e){hidemultitripseatdropdown();e.stopPropagation();number=parseInt($(this).parent().find(".add-minus-func__number").val());if(number<100){number++;}
+$(this).parent().find(".add-minus-func__number").empty().val(number);$(this).parent().attr("data-value",number);});$("#numberofpeopledropdown").on("click",function(e){e.stopPropagation();});$(".cross-button-for-multitrip").on("click",function(){counter=parseInt($("#single_trip_counter").val());counter=counter-1;if(counter<0){counter=0;}
+$("#single_trip_counter").val(counter);$(this).parent().parent().remove();});function bind_remove_row(){$(".cross-button-for-multitrip").on("click",function(){counter=parseInt($("#single_trip_counter").val());counter=counter-1;if(counter<0){counter=0;}
+$("#single_trip_counter").val(counter);$(this).parent().parent().remove();});}
+$("#offset_by_ton").change(function(){offset_by_ton=Number($("#offset_by_ton").val());if(offset_by_ton<0){alert("Please insert value greater than 0.");$("#offset_by_ton").val(0);return;}});$("#triptype-button-value").on('click',function(e){hidepeopleDropdown();hideseatdropdown();hidesearchforAirport();e.stopPropagation();var dropdowncontainertriptype=document.getElementById("triptype-dropdown");if(dropdowncontainertriptype.classList.contains("hide")){dropdowncontainertriptype.classList.replace("hide","show");}else if(dropdowncontainertriptype.classList.contains("show")){dropdowncontainertriptype.classList.replace("show","hide");}});$("#single-trip-view__options__people__button-container-button").on('click',function(e){hidetriptypeDropdown();hideseatdropdown();hidesearchforAirport();e.stopPropagation();var dropdowncontainernumberofpeople=document.getElementById("numberofpeopledropdown");if(dropdowncontainernumberofpeople.classList.contains("hide")){dropdowncontainernumberofpeople.classList.replace("hide","show");}else if(dropdowncontainernumberofpeople.classList.contains("show")){dropdowncontainernumberofpeople.classList.replace("show","hide");}});$("#seattype-button-value").on('click',function(e){hidetriptypeDropdown();hidepeopleDropdown();hidesearchforAirport();e.stopPropagation();var dropdowncontainerseattype=document.getElementById("seatdropdown");if(dropdowncontainerseattype.classList.contains("hide")){dropdowncontainerseattype.classList.replace("hide","show");}else if(dropdowncontainerseattype.classList.contains("show")){dropdowncontainerseattype.classList.replace("show","hide");}});$("#multipletrip-seattype-button-value").on('click',function(){var dropdowncontainerseattype=document.getElementById("multipletrip-seatdropdown");if(dropdowncontainerseattype.classList.contains("hide")){dropdowncontainerseattype.classList.replace("hide","show");}else if(dropdowncontainerseattype.classList.contains("show")){dropdowncontainerseattype.classList.replace("show","hide");}});function multitripSelectTriptype(){var updateValue2;var oldValue1=document.querySelector("#multipletrip-seattypeDisplay");document.getElementById("multipletrip-seattype-list").addEventListener("click",function(e){if(e.target&&e.target.nodeName=="LI"){if(e.target.classList.contains("multitrip_selected_seat")){hidemultitripseatdropdown();}else{document.querySelector(".multitrip_selected_seat").classList.remove("multitrip_selected_seat");e.target.classList.add("multitrip_selected_seat");updateValue2=document.querySelector(".multitrip_selected_seat").innerText;oldValue1.innerHTML=updateValue2;$('#multipletrip-seattype-button-value').attr('data-value',updateValue2);hidemultitripseatdropdown();}}});}
+function hidetriptypeDropdown(){var dropdowncontainer=document.getElementById("triptype-dropdown");dropdowncontainer.classList.replace("show","hide");}
+function hidepeopleDropdown(){var peopledropdowncontainer=document.getElementById("numberofpeopledropdown");peopledropdowncontainer.classList.replace("show","hide");}
+function hideseatdropdown(){var seatdropdowncontainer=document.getElementById("seatdropdown");seatdropdowncontainer.classList.replace("show","hide");}
+function hidesearchforAirport(){$('.from-airport-dropdown, .to-airport-dropdown').hide();}
+function hidemultitripseatdropdown(){var seatdropdowncontainer=document.getElementById("multipletrip-seatdropdown");seatdropdowncontainer.classList.replace("show","hide");}
+function selectTriptype(){var updateValue;var oldValue=document.querySelector("#triptypeDisplay");document.getElementById("triptype-list").addEventListener("click",function(e){if(e.target&&e.target.nodeName=="LI"){if(e.target.classList.contains("selected_triptype")){hidetriptypeDropdown();}else{document.querySelector(".selected_triptype").classList.remove("selected_triptype");e.target.classList.add("selected_triptype");updateValue=document.querySelector(".selected_triptype").innerText;oldValue.innerHTML=updateValue;$('#triptype-button-value').attr('data-value',updateValue);}}});var updateValue2;var oldValue1=document.querySelector("#seattypeDisplay");document.getElementById("seattype-list").addEventListener("click",function(e){if(e.target&&e.target.nodeName=="LI"){if(e.target.classList.contains("selected_seat")){hideseatdropdown();}else{document.querySelector(".selected_seat").classList.remove("selected_seat");e.target.classList.add("selected_seat");updateValue2=document.querySelector(".selected_seat").innerText;oldValue1.innerHTML=updateValue2;$('#seattype-button-value').attr('data-value',updateValue2);}}});var updateValue3;var oldValue2=document.querySelector("#total-people-traveling");document.getElementById("peoplenumber-list").addEventListener("click",function(e){if(e.target&&e.target.nodeName=="LI"){if(e.target.classList.contains("selected_numberofPeople")){hidepeopleDropdown();}else{document.querySelector(".selected_numberofPeople").classList.remove("selected_numberofPeople");e.target.classList.add("selected_numberofPeople");updateValue3=document.querySelector(".selected_numberofPeople").innerText;oldValue2.innerHTML=updateValue3;$('#single-trip-view__options__people__button-container-button').attr('data-value',updateValue3);hidepeopleDropdown();}}});}
+$('#car-view__calculate-by__selectButton').on('click',function(){var calculatebyDropdown=document.getElementById("car-view__calculate-by__dropdowncontainer");if(calculatebyDropdown.classList.contains("hide")){calculatebyDropdown.classList.replace("hide","show")}else if(calculatebyDropdown.classList.contains("show")){calculatebyDropdown.classList.replace("show","hide");}});$('#boat-view__fuel-type__selectButton').on('click',function(){var fueltypeDropdown=document.getElementById("boat-view__fuel-type__dropdowncontainer");if(fueltypeDropdown.classList.contains("hide")){fueltypeDropdown.classList.replace("hide","show");}else if(fueltypeDropdown.classList.contains("show")){fueltypeDropdown.classList.replace("show","hide");}});function selectCalculateby(){var newValue;var oldValue=document.querySelector('#calculatebyDisplay');document.getElementById('car-view__calculate-by__dropdowncontainer').addEventListener("click",function(e){if(e.target&&e.target.nodeName=="LI"){if(e.target.classList.contains("selected_calculateby")){hideSelectCalculateby();}else{document.querySelector(".selected_calculateby").classList.remove("selected_calculateby");e.target.classList.add("selected_calculateby");newValue=document.querySelector(".selected_calculateby").innerText;new_value=$(".selected_calculateby").attr('data-value');oldValue.innerHTML=newValue;$("#car-view__calculate-by__selectButton").attr("data-value",new_value);if($('#car-view__calculate-by__selectButton').attr('data-value')=='distance'){$('.car-view__calculate-distance').removeClass('d-none');$('.car-view__calculate-hour').addClass('d-none');}
+if($('#car-view__calculate-by__selectButton').attr('data-value')=='hour'){$('.car-view__calculate-distance').addClass('d-none');$('.car-view__calculate-hour').removeClass('d-none');}
+hideSelectCalculateby();}}});}
+function selectFuelType(){var newValue;var oldValue=document.querySelector("#fueltypeDisplay");document.getElementById('boat-view__fuel-type__dropdowncontainer').addEventListener("click",function(e){if(e.target&&e.target.nodeName=="LI"){if(e.target.classList.contains("selected_fueltype")){hideSelectFueltype();}else{document.querySelector(".selected_fueltype").classList.remove("selected_fueltype");e.target.classList.add("selected_fueltype");newValue=document.querySelector(".selected_fueltype").innerText;oldValue.innerHTML=newValue;item_value=$(".selected_fueltype").attr('data-value');$("#boat-view__fuel-type__selectButton").attr("data-value",item_value);hideSelectFueltype();}}});}
+function hideSelectCalculateby(){var calculatebyDropdowncontainer=document.getElementById("car-view__calculate-by__dropdowncontainer");calculatebyDropdowncontainer.classList.replace("show","hide");}
+function hideSelectFueltype(){var fueltypeDropdown=document.getElementById("boat-view__fuel-type__dropdowncontainer");fueltypeDropdown.classList.replace("show","hide");}
+function showAddMoreFlights(){$("#triptypeDisplay").on("DOMSubtreeModified",function(){if(document.querySelector("#triptypeDisplay").innerText=="Multi-City"){$("#another-flight-container").show();}else if(document.querySelector("#triptypeDisplay").innerText=="Round Trip"||document.querySelector("#triptypeDisplay").innerText=="One Way"){$("#another-flight-container").hide();$('.remove_input').remove();$('#single_trip_counter').val(1);var activeTrip=document.querySelectorAll(".single-trip-view__input__container__row");for(var i=0;i<activeTrip.length;i++){if(i==0){continue;}else{activeTrip[i].parentNode.removeChild(activeTrip[i]);}}}})}
+function calculatePeople(){var totalPeople=0;totalPeople+=parseInt($('.infant_onlap_number').val());totalPeople+=parseInt($('.infant_inseat_number').val());totalPeople+=parseInt($('.adult_number').val());totalPeople+=parseInt($('.children_number').val());var placeholder=document.getElementById("total-people-traveling");var peopleValue=document.getElementById("single-trip-view__options__people__button-container-button");placeholder.innerHTML=totalPeople
+peopleValue.setAttribute('data-value',totalPeople);hidepeopleDropdown();}
+function addAnotherFlight(){counter=parseInt($("#single_trip_counter").val());var i=counter;to_place_id="";to_place_name="";from_place_id="";from_place_name="";while(i!=0){to_place_id=$('#to-'+i).val();from_place_id=$('#from-'+i).val();if(!to_place_id||typeof to_place_id==='undefined'){i--;continue;}
+to_place_name=$('#travel-row-'+i).find('.to-location-input').val();from_place_name=$('#travel-row-'+i).find('.from-location-input').val();break;}
+counter=counter+1;if(to_place_id){new_input=`<input class="remove_class" type="hidden" name="from-`+
+counter+
+`" id="from-`+
+counter+
+`" value="`+
+to_place_id+
+`" data-counter="`+
+counter+
+`">`;new_input+=`<input class="`+
+remove_class+
+`" type="hidden" name="from-name-`+
+counter+
+`" id="from-name-`+
+counter+
+`" value="`+
+to_place_name+
+`" data-counter="`+
+counter+
+`">`;$(".single_trip_details").append(new_input);}
+if(from_place_id){_new_input=`<input class="remove_class" type="hidden" name="to-`+
+counter+
+`" id="to-`+
+counter+
+`" value="`+
+from_place_id+
+`" data-counter="`+
+counter+
+`">`;_new_input+=`<input class="`+
+remove_class+
+`" type="hidden" name="to-name-`+
+counter+
+`" id="to-name-`+
+counter+
+`" value="`+
+from_place_name+
+`" data-counter="`+
+counter+
+`">`;$(".single_trip_details").append(_new_input);}
+html=`<div class="single-trip-view__input__container__row" data-count="${counter}" id="travel-row-${counter}">
+
+          <div class="single-trip-view__input__container__row-from" tabindex="0" >
+            <div class="single-trip-view__input__container__row-from-container">
+
+              <div class="from-icon-container">
+                <svg width="15" height="15" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4.50065 0.15271V1.81938H9.99232L0.333984 11.4777L1.50898 12.6527L11.1673 2.99438V8.48604H12.834V0.15271H4.50065Z" fill="#4B5563" />
+                </svg>
+              </div>
+
+              <div class="from-input-container">
+                <input autocomplete="off" type="text" name="" id="from-location-input" class="from-location-input" placeholder="Where From?" datavalue="None" value="${to_place_name}">
+              </div>
+
+              <div class="from-icondropdown-container">
+                
+              </div>
+
+            </div> 
+            <!--DROP DOWN CODE STARTS-->
+            <div class="from-location-dropdown-container from-airport-dropdown" id="from-location-dropdown"> 
+              <div class="from-location-dropdown-subcontainer">
+                <ul class="from-location-dropdown-list" id="from-location-dropdown-list">
+
+                </ul>
+              </div>
+            </div>
+            <!--DROP DOWN CODE ENDS-->
+          </div>
+
+          <div class="single-trip-view__input__container__row-exchange">
+
+            <svg class="exchange-svg-mobile" width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16.3353 4.2829L8.17257 4.2829V6.61086L16.3353 6.61086V10.1028L20.9814 5.44688L16.3353 0.79096V4.2829ZM0.0214844 12.4308L4.6676 17.0867V13.5947H12.8303V11.2668H4.6676L4.6676 7.77484L0.0214844 12.4308ZM16.3353 4.2829L8.17257 4.2829V6.61086L16.3353 6.61086V10.1028L20.9814 5.44688L16.3353 0.79096V4.2829ZM0.0214844 12.4308L4.6676 17.0867V13.5947H12.8303V11.2668H4.6676L4.6676 7.77484L0.0214844 12.4308Z" fill="#4B5563"></path>
+            </svg>
+
+          </div>
+
+          <div class="single-trip-view__input__container__row-to" tabindex="0">
+            <div class="single-trip-view__input__container__row-to-container">
+
+              <div class="to-icon-container">
+                <svg width="16" height="16" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M13.291 4.48612H11.6243V9.97779L1.96602 0.319458L0.791016 1.49446L10.4493 11.1528H4.95768V12.8195H13.291V4.48612Z" fill="#4B5563" />
+                </svg>
+              </div>
+
+              <div class="to-input-container">
+                <input autocomplete="off" type="text" name="" id="to-location-input" class="to-location-input" placeholder="Where To?" datavalue="none" value="${from_place_name}">
+              </div>
+
+              <div class="to-icondropdown-container">
+                
+              </div>
+
+            </div>
+            <!--DROP DOWN CODE STARTS-->
+            <div class="from-location-dropdown-container to-airport-dropdown" id="to-location-dropdown">
+              <div class="from-location-dropdown-subcontainer">
+                <ul class="from-location-dropdown-list to-location-dropdown-list" id="to-location-dropdown-list">
+
+                </ul>
+              </div>
+            </div>
+            <!--DROP DOWN CODE STARTS-->
+          </div>
+
+          <div class="delete-container hide" id="delete-container">
+            <svg width="15" height="15" viewBox="0 0 24 24" focusable="false" class="cross-icon">
+              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" fill="#4B5563">
+              </path>
+            </svg>
+          </div>
+
+  <div class="delete-container" id="delete-container">
+    <svg width="15" height="15" viewBox="0 0 24 24" focusable="false" class="cross-icon">
+      <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" fill="#4B5563">
+      </path>
+    </svg>
+  </div>
+
+</div>`;$('.single-trip-view__input__container').append(html);$("#single_trip_counter").val(counter);RemoveTrip();bindDropDowns();bindAnotherFlight();bind_exchange_places();};function RemoveTrip(){$(".delete-container").on("click",function(event){event.stopImmediatePropagation();event.preventDefault();$(this).parent().remove();row_counter=parseInt($(this).parent().attr('data-count'));$('#from-'+row_counter).remove();$('#to-'+row_counter).remove();$('#from-name-'+row_counter).remove();$('#to-name-'+row_counter).remove();trip_counter=parseInt($("#single_trip_counter").val());trip_counter=trip_counter<0?0:trip_counter;$("#single_trip_counter").val(trip_counter);});};RemoveTrip();function bind_exchange_places(){$('.single-trip-view__input__container__row-exchange').on('click',function(event){event.stopImmediatePropagation();event.preventDefault();var from=this.previousElementSibling.firstElementChild.querySelector('.from-location-input').value;var temp=from;var to=this.nextElementSibling.firstElementChild.querySelector('.to-location-input').value;from=to;to=temp;this.previousElementSibling.firstElementChild.querySelector('.from-location-input').value=from;this.nextElementSibling.firstElementChild.querySelector('.to-location-input').value=to;counter=$(this).parent().attr('data-count');from_temp=$('#from-'+counter).val();to_temp=$('#to-'+counter).val();from_dropdown=$(this).parent().find('.from-location-dropdown-list').html();to_dropdown=$(this).parent().find('.to-location-dropdown-list').html();if(from_temp){$('#to-'+counter).val(from_temp);$(this).parent().find('.to-list').empty().html(from_dropdown);$(this).parent().find('.from_dropdown_class').removeClass('register_input_from');$(this).parent().find('.from_dropdown_class').addClass('register_input_to');$(this).parent().find('.from_dropdown_class').removeClass('from_dropdown_class');}
+if(to_temp){$('#from-'+counter).val(to_temp);$(this).parent().find('.from-list').empty().html(to_dropdown);$(this).parent().find('.to_dropdown_class').removeClass('register_input_to');$(this).parent().find('.to_dropdown_class').addClass('register_input_from');$(this).parent().find('.to_dropdown_class').removeClass('to_dropdown_class');}
+bindDropDowns();bindRegisterInputTo();bindAnotherFlight();bindAirportDropDown();bindClickonCountry();});}
+bind_exchange_places();function bindDropDowns(){$('.single-trip-view__input__container__row-from-container').on('click',function(event){event.stopImmediatePropagation();event.preventDefault();if(this.nextElementSibling.classList.contains('hide')){this.nextElementSibling.classList.replace('hide','show');}else{this.nextElementSibling.classList.replace('show','hide');}});$('.single-trip-view__input__container__row-to-container').one('click',function(event){event.stopImmediatePropagation();event.preventDefault();if(this.nextElementSibling.classList.contains('hide')){this.nextElementSibling.classList.replace('hide','show');}else{this.nextElementSibling.classList.replace('show','hide');}});$('.from-location-dropdown-listitem').on('click',function(){var $element=$(this);var dataValue=$element.attr('datavalue');this.parentElement.parentElement.parentElement.previousElementSibling.lastElementChild.firstElementChild.setAttribute('datavalue',dataValue);this.parentElement.parentElement.parentElement.previousElementSibling.lastElementChild.firstElementChild.setAttribute('value',dataValue);});$('.from-location-dropdown-listitem-airport-container').on('click',function(){var dataValue=this.firstElementChild.lastElementChild.firstElementChild.innerHTML;this.parentElement.parentElement.parentElement.previousElementSibling.lastElementChild.firstElementChild.setAttribute('datavalue',dataValue);this.parentElement.parentElement.parentElement.previousElementSibling.lastElementChild.firstElementChild.setAttribute('value',dataValue);});};$('.from-location-dropdown-listitem-airport-container').on('click',function(){var dataValue=this.firstElementChild.lastElementChild.firstElementChild.innerHTML;this.parentElement.parentElement.parentElement.previousElementSibling.lastElementChild.firstElementChild.setAttribute('datavalue',dataValue);this.parentElement.parentElement.parentElement.previousElementSibling.lastElementChild.firstElementChild.setAttribute('value',dataValue);})
+$('.general-select-option').on('click',function(){let hours=Number(document.querySelector("#hour_driven").value);let distance=Number(document.querySelector("#distance_travel").value);let distance_type=document.querySelector(".distance-type").getAttribute("data-value");let calculate_by=$("#car-view__calculate-by__selectButton").attr('data-value');car_values_array=getCookie("car_values");console.log(car_values_array);car_values_array=JSON.parse(car_values_array);if(hours==''&&distance==''){}else{car_values_array=car_values_array&&car_values_array.length>0?car_values_array:[];new_car_value={travel:"car",type:window.current_options.car,hours:hours,distance:distance,calculate_by:calculate_by,calculate_unit:distance_type}
+console.log("active_car",window.current_options.car);setCookie("active_car",window.current_options.car);if(car_values_array.length>0){car_values_array=car_values_array.filter(function(car_value){return car_value.type!=window.current_options.car});car_values_array.push(new_car_value);}else{car_values_array.push(new_car_value);}
+console.log('car_valuess',car_values_array);setCookie("car_values",JSON.stringify(car_values_array));}
+var car_type=$(this).attr('data-car');$('.car-view__calculate-distance').removeClass('d-none');$('.car-view__calculate-hour').addClass('d-none');$('#kilometer_option, #miles_option').removeClass('selected');$('#miles_option').addClass('selected');$('#car-view__calculate-by__selectButton').attr('data-value','distance');$('#calculate_by_distance, #calculate_by_hour').removeClass('selected_calculateby');$('#calculate_by_distance').addClass('selected_calculateby');$('#calculatebyDisplay').empty().html('Distance');$('#distance_travel').val('');$('#hour_driven').val('');if(car_values_array.length>0){for(var i=0;i<car_values_array.length;i++){var option=car_values_array[i];if(option.travel=="car"){if(option.type!==car_type){continue;}
+console.log(option.calculate_unit);console.log(option.calculate_by);if(option.calculate_by=='distance'){$('#calculate_by_distance').addClass('selected_calculateby');$('#calculatebyDisplay').empty().html('Distance');$('#car-view__calculate-by__selectButton').attr('data-value','distance');$('.car-view__calculate-distance').removeClass('d-none');$('.car-view__calculate-hour').addClass('d-none');$('#kilometer_option, #miles_option').removeClass('selected');$('#'+option.calculate_unit+'_option').addClass('selected');$('.distance-type').attr('data-value',option.calculate_unit);}else{$('#calculate_by_distance').removeClass('selected_calculateby');$('#calculate_by_hour').addClass('selected_calculateby');$('#calculatebyDisplay').empty().html('Hour');$('#car-view__calculate-by__selectButton').attr('data-value','hour');$('.car-view__calculate-hour').removeClass('d-none');$('.car-view__calculate-distance').addClass('d-none');}
+if(option.type=="standard-car"&&car_type=="standard-car"){if(option.distance!='0'){$('#hour_driven').val('');$('#distance_travel').val(option.distance);}else if(option.hours!='0'){$('#distance_travel').val('');$('#hour_driven').val(option.hours);}}else if(option.type=="4x4"&&car_type=="4x4"){if(option.distance!='0'){$('#hour_driven').val('');$('#distance_travel').val(option.distance);}else if(option.hours!='0'){$('#distance_travel').val('');$('#hour_driven').val(option.hours);}}else if(option.type=="van"&&car_type=="van"){if(option.distance!='0'){$('#hour_driven').val('');$('#distance_travel').val(option.distance);}else if(option.hours!='0'){$('#distance_travel').val('');$('#hour_driven').val(option.hours);}}else if(option.type=="hybrid"&&car_type=="hybrid"){if(option.distance!='0'){$('#hour_driven').val('');$('#distance_travel').val(option.distance);}else if(option.hours!='0'){$('#distance_travel').val('');$('#hour_driven').val(option.hours);}}else if(option.type=="motorcycle"&&car_type=="motorcycle"){if(option.distance!='0'){$('#hour_driven').val('');$('#distance_travel').val(option.distance);}else if(option.hours!='0'){$('#distance_travel').val('');$('#hour_driven').val(option.hours);}}else if(option.type=="luxury"&&car_type=="luxury"){if(option.distance!='0'){$('#hour_driven').val('');$('#distance_travel').val(option.distance);}else if(option.hours!='0'){$('#distance_travel').val('');$('#hour_driven').val(option.hours);}}}}}});function changeColorTheme(header,backgroundColor,primaryColor,secondaryColor){var newHeaderColor=header;var newbackgroundColor=backgroundColor;var newPrimaryColor=primaryColor;var newSecondaryColor=secondaryColor;$('.main-header__left-image').css({'background-color':newHeaderColor,});$('.select-automobile .select-av-option').css({'border-color':newPrimaryColor,});$('.select-automobile .select-av-option.selected').css({'background-color':newbackgroundColor,})
+$('.calculate-btn').css({'background-color':newPrimaryColor,});$('.radio-av-option.selected .radio-av-radio-filler').css({'background-color':newPrimaryColor,});$('.radio-av-option.selected .radio-av-radio').css({'border-color':newPrimaryColor,});$('.icon-selected-automobile-para').css({'fill':newPrimaryColor,'color':newPrimaryColor});$('.select-automobile__para').css({'color':newPrimaryColor});$('#calculate-manual-offset').css({'background-color':newPrimaryColor});$('#offset-button').css({'background-color':newSecondaryColor,});}
+function getCookie(name){var nameEQ=name+"=";var ca=document.cookie.split(";");for(var i=0;i<ca.length;i++){var c=ca[i];while(c.charAt(0)==" ")c=c.substring(1,c.length);if(c.indexOf(nameEQ)==0)return c.substring(nameEQ.length,c.length);}
+return null;}
+function setCookie(name,value){days=365;var expires="";if(days){var date=new Date();date.setTime(date.getTime()+days*24*60*60*1000);expires="; expires="+date.toUTCString();}
+document.cookie=name+"="+(value||"")+expires+"; path=/";}
+function eraseCookie(name){document.cookie=name+"=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";}
